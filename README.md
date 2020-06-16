@@ -7,3 +7,6 @@ Project Documentation:
 
 [Project Documentation](https://github.com/naveenpi/show-time-tickets/blob/master/Documentation/Project%20Documentation.doc)
 
+ER Diagram:
+
+[ER diagram](https://github.com/naveenpi/show-time-tickets/blob/master/Documentation/ERdiagram.pdf)
