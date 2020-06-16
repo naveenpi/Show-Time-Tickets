@@ -5,5 +5,5 @@ The application helps the users to eliminate the efforts to go to the movie thea
 
 Project Documentation: 
 
-![Project Documentation](Documentation/Project Documentation.doc)
+[Project Documentation](https://github.com/naveenpi/show-time-tickets/blob/master/Documentation/Project%20Documentation.doc)
 
