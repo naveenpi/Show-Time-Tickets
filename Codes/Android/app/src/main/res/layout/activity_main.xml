@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/yellow"
     tools:context=".MainActivity">
 
 
@@ -18,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.117"
-        app:srcCompat="@drawable/reel"/>
+        app:srcCompat="@drawable/ic_movie_black_24dp"/>
     />
 
     <EditText
@@ -67,6 +68,19 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/to_Sign_Up"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintHorizontal_bias="0.57"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/login_button" />
+
+    <TextView
+        android:id="@+id/forgot_password_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/forgot_password"
         android:textColor="@color/black"
         android:textSize="15sp"
         app:layout_constraintHorizontal_bias="0.57"
