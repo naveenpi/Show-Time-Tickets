@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 public class SignUp extends AppCompatActivity {
 
+    EditText name,email,password,confirmpassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
