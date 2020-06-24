@@ -23,12 +23,15 @@ public class MainActivity extends AppCompatActivity {
     Button login;
     TextView forgotPassword;
     TextView newAccount;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         login=findViewById(R.id.login_button);
+        forgotPassword=findViewById(R.id.forgot_password_text);
+        newAccount=findViewById(R.id.sign_up_text);
+
         startAnimation();
         login.setOnClickListener(new View.OnClickListener() {
             @Override
