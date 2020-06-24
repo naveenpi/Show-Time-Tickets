@@ -32,13 +32,20 @@ public class MainActivity extends AppCompatActivity {
         forgotPassword=findViewById(R.id.forgot_password_text);
         newAccount=findViewById(R.id.sign_up_text);
 
+
+
         startAnimation();
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                Intent home=new Intent(MainActivity.this,HomeActivity.class);
+                startActivity(home);
+                finish();
             }
         });
+
+
 
         EditText username, password;
         username=findViewById(R.id.userName);
