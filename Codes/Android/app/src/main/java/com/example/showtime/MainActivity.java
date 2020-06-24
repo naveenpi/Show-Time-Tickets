@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.regex.Matcher;
@@ -20,6 +21,9 @@ public class MainActivity extends AppCompatActivity {
      * Button for login
      */
     Button login;
+    TextView forgotPassword;
+    TextView newAccount;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
