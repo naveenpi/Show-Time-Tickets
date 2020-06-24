@@ -3,10 +3,16 @@ package com.example.showtime;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +32,35 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        EditText username, password;
+        username=findViewById(R.id.userName);
+        password=findViewById(R.id.password);
+        String regex="^(.+)@(.+)$";
+        Pattern pattern = Pattern.compile(regex);
+
+
+        String name;
+        String email_id="";/*fetch from DB*/
+
+        Matcher matcher = pattern.matcher(email_id);
+        if(matcher.matches()) {
+            String userEnteredPassword=password.getText().toString();;
+            String passwordFromDB="";/*fetch from DB*/
+            if(passwordFromDB.equals(userEnteredPassword)){
+
+                username.setError(null);
+                Intent toHome = new Intent(getApplicationContext(),HomeActivity.class);
+                finish();
+            }
+            else{
+                Toast.makeText(getApplicationContext(), "wrong credentials", Toast.LENGTH_SHORT).show();
+            }
+        }
+        else{
+            Toast.makeText(getApplicationContext(), "Incorrect user name", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     private void startAnimation() {
@@ -54,6 +89,8 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+
+
 
 
 }
