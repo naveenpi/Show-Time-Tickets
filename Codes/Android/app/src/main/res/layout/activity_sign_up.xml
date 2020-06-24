@@ -37,18 +37,32 @@
         app:layout_constraintVertical_bias="0.039" />
 
     <EditText
-        android:id="@+id/phone"
+        android:id="@+id/age"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:ems="10"
-        android:hint="Phone number"
-        android:inputType="phone"
+        android:hint="Age"
+        android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.535"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/Email_ID"
+        app:layout_constraintVertical_bias="0.045" />
+    <EditText
+        android:id="@+id/phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:hint="Phone Number"
+        android:inputType="phone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.535"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/age"
         app:layout_constraintVertical_bias="0.045" />
 
 
@@ -58,7 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:ems="10"
-        android:hint="password"
+        android:hint="Password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -73,7 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:ems="10"
-        android:hint="confirm password"
+        android:hint="Confirm Password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
