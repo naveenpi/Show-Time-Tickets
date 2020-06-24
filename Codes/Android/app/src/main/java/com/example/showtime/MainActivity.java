@@ -94,23 +94,14 @@ public class MainActivity extends AppCompatActivity {
         while (!login.isPressed()) {
             ImageView reelIcon = (ImageView) findViewById(R.id.animation);
             float reelIconValue = reelIcon.getY();
-            ObjectAnimator animX = ObjectAnimator.ofFloat(
-                    reelIcon, "x",
-                    reelIcon.getX(),
-                    reelIcon.getX() + 100.0f,
-                    reelIcon.getX() + 300.0f,
-                    reelIcon.getX() + 500.0f);
-            ObjectAnimator animY = ObjectAnimator.ofFloat(
-                    reelIcon, "y",
-                    200.0f, 300.0f, 200.0f, 300.0f, 200.0f,300.0f);
-            ObjectAnimator animAlpha = ObjectAnimator.ofFloat(
-                    reelIcon, "alpha",
-                    1.0f);
-            animX.setDuration(10000);
-            animY.setDuration(10000);
-            animAlpha.setDuration(10000);
-            animX.start();
-            animY.start();
+            ObjectAnimator animateXAxis = ObjectAnimator.ofFloat( reelIcon, "x",reelIcon.getX(), reelIcon.getX() + 100.0f, reelIcon.getX() + 300.0f, reelIcon.getX() + 500.0f);
+            ObjectAnimator animateYAxis = ObjectAnimator.ofFloat(reelIcon, "y", 250.0f, 100.0f, 600.0f, 700.0f, 100.0f,200.0f);
+            ObjectAnimator animAlpha = ObjectAnimator.ofFloat(reelIcon, "alpha", 1.0f);
+            animateXAxis.setDuration(40000);
+            animateYAxis.setDuration(50000);
+            animAlpha.setDuration(50000);
+            animateXAxis.start();
+            animateYAxis.start();
             animAlpha.start();
 
         }
