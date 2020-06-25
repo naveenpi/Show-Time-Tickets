@@ -18,13 +18,33 @@ public class SignUp extends AppCompatActivity {
         phone=findViewById(R.id.phone);
         age=findViewById(R.id.age);
         confirmpassword=findViewById(R.id.confirm_password);
-        String Name;
-        String EmailID;
-        String age;
-        String phone;
-        String Password;
-        String ConfirmPassword;
-       
+
+        if(name.getText().toString().isEmpty()){
+            name.setError("Enter the Name");
+        }
+        if(email.getText().toString().isEmpty()){
+            email.setError("Enter the Email");
+        }
+        if(password.getText().toString().isEmpty()){
+            password.setError("Enter the password");
+        }
+        if(confirmpassword.getText().toString().isEmpty()){
+            confirmpassword.setError("Enter the password again");
+        }
+        if(phone.getText().toString().isEmpty()){
+            phone.setError("Enter the phone number");
+        }
+        if(age.getText().toString().isEmpty()){
+            age.setError("Enter the age");
+        }
+
+//        String Name;
+//        String EmailID;
+//        String age;
+//        String phone;
+//        String Password;
+//        String ConfirmPassword;
+
         
     }
 }
