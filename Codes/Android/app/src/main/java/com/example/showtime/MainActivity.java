@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     Button login;
     TextView forgotPassword;
     TextView newAccount;
+    EditText username, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,14 +32,21 @@ public class MainActivity extends AppCompatActivity {
         login=findViewById(R.id.login_button);
         forgotPassword=findViewById(R.id.forgot_password_text);
         newAccount=findViewById(R.id.sign_up_text);
-
-
+        username=findViewById(R.id.userName);
+        password=findViewById(R.id.password);
 
         startAnimation();
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                if(username.getText().toString().isEmpty()){
+                    username.setError("Please type the username");
+                }
+                if(password.getText().toString().isEmpty()){
+                    password.setError("Please type the password");
+                }
                 Intent home=new Intent(MainActivity.this,HomeActivity.class);
                 startActivity(home);
                 finish();
@@ -51,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
         newAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,9 +66,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        EditText username, password;
-        username=findViewById(R.id.userName);
-        password=findViewById(R.id.password);
+
+
         String regex="^(.+)@(.+)$";
         Pattern pattern = Pattern.compile(regex);
 
