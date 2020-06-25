@@ -38,12 +38,12 @@ public class SignUp extends AppCompatActivity {
             age.setError("Enter the age");
         }
 
-//        String Name;
-//        String EmailID;
-//        String age;
-//        String phone;
-//        String Password;
-//        String ConfirmPassword;
+        String Name;
+        String EmailID;
+        String age;
+        String phone;
+        String Password;
+        String ConfirmPassword;
 
         
     }
