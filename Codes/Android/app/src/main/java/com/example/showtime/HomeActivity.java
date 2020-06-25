@@ -25,6 +25,21 @@ public class HomeActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     }
     @Override
     public boolean onMenuItemClick(MenuItem item) {
-   
+        switch (item.getItemId()){
+            case R.id.item1:
+                return true;
+            case R.id.item2:
+                Intent toLogin=new Intent(this,MainActivity.class);
+                startActivity(toLogin);
+                return true;
+            case R.id.item3:
+                Intent toSignUp=new Intent(this,SignUp.class);
+                startActivity(toSignUp);
+                return true;
+            default:
+                Intent toForgotPassword=new Intent(this,ForgotPassword.class);
+                startActivity(toForgotPassword);
+                return true;
+        }
     }
 }
