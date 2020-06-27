@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "720823267638",
+    "firebase_url": "https://showtimetickets-f7bb2.firebaseio.com",
+    "project_id": "showtimetickets-f7bb2",
+    "storage_bucket": "showtimetickets-f7bb2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:720823267638:android:0efa46c635cd58ff58c397",
+        "android_client_info": {
+          "package_name": "com.example.showtime"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "720823267638-la4tdl82to0grnqo819js9a8aj4e18a8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.showtime",
+            "certificate_hash": "80d852e9d10e6da7ad36a0fbd7103f8b579408be"
+          }
+        },
+        {
+          "client_id": "720823267638-33gn305hhn4g12prenaec4qr454f22ah.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQVuNUWT9PUQ5wkOj3UKJovS7dkqjDjTk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "720823267638-33gn305hhn4g12prenaec4qr454f22ah.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
