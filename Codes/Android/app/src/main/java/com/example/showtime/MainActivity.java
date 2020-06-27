@@ -8,6 +8,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,20 +24,21 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Button for login
      */
-    Button login;
+    Button login, register;
     TextView forgotPassword;
-    TextView newAccount;
-    EditText username, password;
+
+    EditText emailID, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         login=findViewById(R.id.login_button);
+        register=findViewById(R.id.register_button_Login);
         forgotPassword=findViewById(R.id.forgot_password_text);
-        newAccount=findViewById(R.id.sign_up_text);
-        username=findViewById(R.id.userName);
-        password=findViewById(R.id.password);
+        emailID=findViewById(R.id.emailID_Login);
+        password=findViewById(R.id.password_Login);
 
         startAnimation();
 
@@ -44,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(username.getText().toString().isEmpty()){
-                    username.setError("Please type the username");
+                if(emailID.getText().toString().isEmpty()){
+                    emailID.setError("Please type the username");
                 }
                 if(password.getText().toString().isEmpty()){
                     password.setError("Please type the password");
@@ -56,19 +58,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(getApplicationContext(),SignUp.class));
+                finish();
+            }
+        });
 
         forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(getApplicationContext(),ForgotPassword.class));
+                Log.d("toForgot","forgot");
+                finish();
             }
         });
-        newAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
 
 
 
@@ -85,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
             String passwordFromDB="";/*fetch from DB*/
             if(passwordFromDB.equals(userEnteredPassword)){
 
-                username.setError(null);
+                emailID.setError(null);
                 Intent toHome = new Intent(getApplicationContext(),HomeActivity.class);
                 finish();
             }
