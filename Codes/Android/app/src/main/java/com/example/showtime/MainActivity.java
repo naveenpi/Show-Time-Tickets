@@ -1,5 +1,6 @@
 package com.example.showtime;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.ObjectAnimator;
@@ -16,6 +17,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,6 +34,10 @@ public class MainActivity extends AppCompatActivity {
     TextView forgotPassword;
     EditText emailID, password;
 
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+    String emailIDString,passwordString;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,21 +49,35 @@ public class MainActivity extends AppCompatActivity {
         emailID=findViewById(R.id.emailID_Login);
         password=findViewById(R.id.password_Login);
 
-        startAnimation();
+        //startAnimation();
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(emailID.getText().toString().isEmpty()){
-                    emailID.setError("Please type the username");
-                }
-                if(password.getText().toString().isEmpty()){
-                    password.setError("Please type the password");
-                }
-                Intent home=new Intent(MainActivity.this,HomeActivity.class);
-                startActivity(home);
-                finish();
+                emailIDString = emailID.getText().toString().trim();
+                passwordString = password.getText().toString().trim();
+
+                mAuth.signInWithEmailAndPassword(emailIDString, passwordString).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            if (mAuth.getCurrentUser().isEmailVerified()) {
+                                Toast.makeText(MainActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                                finish();
+                            } else {
+                                Toast.makeText(MainActivity.this, "Verify your Email address", Toast.LENGTH_SHORT).show();
+                            }
+
+                        } else {
+                            Toast.makeText(MainActivity.this, "Wrong credentials" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+
+                        }
+
+                    }
+                });
+
             }
         });
 
@@ -104,24 +128,24 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
-    private void startAnimation() {
-
-        while (!login.isPressed()) {
-            ImageView reelIcon = (ImageView) findViewById(R.id.animation);
-            float reelIconValue = reelIcon.getY();
-            ObjectAnimator animateXAxis = ObjectAnimator.ofFloat( reelIcon, "x",reelIcon.getX(), reelIcon.getX() + 100.0f, reelIcon.getX() + 300.0f, reelIcon.getX() + 500.0f);
-            ObjectAnimator animateYAxis = ObjectAnimator.ofFloat(reelIcon, "y", 250.0f, 100.0f, 600.0f, 700.0f, 100.0f,200.0f);
-            ObjectAnimator animAlpha = ObjectAnimator.ofFloat(reelIcon, "alpha", 1.0f);
-            animateXAxis.setDuration(40000);
-            animateYAxis.setDuration(50000);
-            animAlpha.setDuration(50000);
-            animateXAxis.start();
-            animateYAxis.start();
-            animAlpha.start();
-
-        }
-    }
+//
+//    private void startAnimation() {
+//
+//        while (!login.isPressed()) {
+//            ImageView reelIcon = (ImageView) findViewById(R.id.animation);
+//            float reelIconValue = reelIcon.getY();
+//            ObjectAnimator animateXAxis = ObjectAnimator.ofFloat( reelIcon, "x",reelIcon.getX(), reelIcon.getX() + 100.0f, reelIcon.getX() + 300.0f, reelIcon.getX() + 500.0f);
+//            ObjectAnimator animateYAxis = ObjectAnimator.ofFloat(reelIcon, "y", 250.0f, 100.0f, 600.0f, 700.0f, 100.0f,200.0f);
+//            ObjectAnimator animAlpha = ObjectAnimator.ofFloat(reelIcon, "alpha", 1.0f);
+//            animateXAxis.setDuration(40000);
+//            animateYAxis.setDuration(50000);
+//            animAlpha.setDuration(50000);
+//            animateXAxis.start();
+//            animateYAxis.start();
+//            animAlpha.start();
+//
+//        }
+//    }
 
 
 
