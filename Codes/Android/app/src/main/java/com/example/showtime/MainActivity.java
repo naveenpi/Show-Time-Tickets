@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
      */
     Button login, register;
     TextView forgotPassword;
-
     EditText emailID, password;
 
     @Override
