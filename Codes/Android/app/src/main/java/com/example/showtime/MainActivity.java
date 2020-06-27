@@ -4,9 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.ObjectAnimator;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,18 +33,18 @@ public class MainActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
-    String emailIDString,passwordString;
+    String emailIDString, passwordString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        login=findViewById(R.id.login_button);
-        register=findViewById(R.id.register_button_Login);
-        forgotPassword=findViewById(R.id.forgot_password_text);
-        emailID=findViewById(R.id.emailID_Login);
-        password=findViewById(R.id.password_Login);
+        login = findViewById(R.id.login_button);
+        register = findViewById(R.id.register_button_Login);
+        forgotPassword = findViewById(R.id.forgot_password_text);
+        emailID = findViewById(R.id.emailID_Login);
+        password = findViewById(R.id.password_Login);
 
         //startAnimation();
 
@@ -62,16 +59,9 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            if (mAuth.getCurrentUser().isEmailVerified()) {
-                                Toast.makeText(MainActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-                                finish();
-                            } else {
-                                Toast.makeText(MainActivity.this, "Verify your Email address", Toast.LENGTH_SHORT).show();
-                            }
+
 
                         } else {
-                            Toast.makeText(MainActivity.this, "Wrong credentials" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
 
                         }
 
@@ -85,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(getApplicationContext(),SignUp.class));
+                startActivity(new Intent(getApplicationContext(), SignUp.class));
                 finish();
             }
         });
@@ -93,41 +83,12 @@ public class MainActivity extends AppCompatActivity {
         forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),ForgotPassword.class));
-                Log.d("toForgot","forgot");
+                startActivity(new Intent(getApplicationContext(), ForgotPassword.class));
+                Log.d("toForgot", "forgot");
                 finish();
             }
         });
 
-
-
-
-        String regex="^(.+)@(.+)$";
-        Pattern pattern = Pattern.compile(regex);
-
-
-        String name;
-        String email_id="";/*fetch from DB*/
-
-        Matcher matcher = pattern.matcher(email_id);
-        if(matcher.matches()) {
-            String userEnteredPassword=password.getText().toString();;
-            String passwordFromDB="";/*fetch from DB*/
-            if(passwordFromDB.equals(userEnteredPassword)){
-
-                emailID.setError(null);
-                Intent toHome = new Intent(getApplicationContext(),HomeActivity.class);
-                finish();
-            }
-            else{
-                Toast.makeText(getApplicationContext(), "wrong credentials", Toast.LENGTH_SHORT).show();
-            }
-        }
-        else{
-            Toast.makeText(getApplicationContext(), "Incorrect user name", Toast.LENGTH_SHORT).show();
-        }
-
-    }
 //
 //    private void startAnimation() {
 //
@@ -148,6 +109,5 @@ public class MainActivity extends AppCompatActivity {
 //    }
 
 
-
-
+    }
 }
