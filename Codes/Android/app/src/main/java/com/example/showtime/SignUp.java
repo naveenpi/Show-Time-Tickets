@@ -98,11 +98,19 @@ public class SignUp extends AppCompatActivity {
                             }
                         }
                     });
+
                 }
 
             }
         });
 
+        login_Registration_Text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                finish();
+            }
+        });
 
         
     }
