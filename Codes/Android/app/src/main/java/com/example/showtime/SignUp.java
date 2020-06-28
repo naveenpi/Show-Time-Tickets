@@ -114,4 +114,42 @@ public class SignUp extends AppCompatActivity {
 
         
     }
+
+    private boolean validations() {
+
+        if(fullName_EditText.getText().toString().isEmpty()){
+            fullName_EditText.setError("Enter the Full Name");
+            return false;
+        }
+        if(email_EditText.getText().toString().isEmpty()){
+            email_EditText.setError("Enter the E-mail address");
+            return false;
+        }
+        matcher = pattern.matcher(emailRegisterString);
+
+        if(age_EditText.getText().toString().isEmpty()){
+            age_EditText.setError("Enter Age");
+            return false;
+        }
+        if(phone_EditText.getText().toString().isEmpty()){
+            phone_EditText.setError("Enter Phone Number");
+            return false;
+        }
+        if(password_EditText.getText().toString().isEmpty()){
+            password_EditText.setError("Enter password");
+            return false;
+        }
+        if(confirmPassword_EditText.getText().toString().isEmpty()){
+            confirmPassword_EditText.setError("Enter confirm password");
+            return false;
+        }
+        if(!passwordRegisterString.equals(confirmPasswordRegisterString)){
+            Toast.makeText(SignUp.this,"Password does not match",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(!matcher.matches()){
+            email_EditText.setError("Invalid Email address");
+        }
+        return true;
+    }
 }
