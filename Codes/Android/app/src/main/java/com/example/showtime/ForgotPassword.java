@@ -1,12 +1,16 @@
 package com.example.showtime;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class ForgotPassword extends AppCompatActivity {
@@ -25,5 +29,12 @@ public class ForgotPassword extends AppCompatActivity {
         emailID_ForgotPassword_EditText=findViewById(R.id.Email_ID_Forgot_Password);
         resetButton=findViewById(R.id.Reset_Forgot_Password);
         toLogin=findViewById(R.id.toLogin);
+
+        resetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 }
