@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -34,7 +35,21 @@ public class ForgotPassword extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                mAuth.sendPasswordResetEmail(emailID_ForgotPassword_EditText.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                        if(task.isSuccessful()){
+                            Toast.makeText(ForgotPassword.this,"Password reset link is sent to the given Email Id",Toast.LENGTH_SHORT);
+                        }
+                        else{
+                            Toast.makeText(ForgotPassword.this,task.getException().getMessage(),Toast.LENGTH_SHORT);
+                        }
+                    }
+                });
             }
         });
+
+
     }
 }
