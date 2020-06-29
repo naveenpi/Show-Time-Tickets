@@ -58,10 +58,18 @@ public class MainActivity extends AppCompatActivity {
                 mAuth.signInWithEmailAndPassword(emailIDString, passwordString).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
 
+                        if (task.isSuccessful()) {
+                            if (mAuth.getCurrentUser().isEmailVerified()) {
+                                Toast.makeText(MainActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                                finish();
+                            } else {
+                                Toast.makeText(MainActivity.this, "Verify your Email address", Toast.LENGTH_SHORT).show();
+                            }
 
                         } else {
+                            Toast.makeText(MainActivity.this, "Wrong credentials" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
 
                         }
 
