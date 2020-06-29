@@ -8,6 +8,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class HomeActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener
 {
 
@@ -41,5 +43,10 @@ public class HomeActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 startActivity(toForgotPassword);
                 return true;
         }
+    }
+    public void logout(View view) {
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+        finish();
     }
 }

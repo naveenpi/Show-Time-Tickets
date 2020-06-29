@@ -177,6 +177,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Log out"
+        android:onClick="logout"
         tools:layout_editor_absoluteX="299dp"
         tools:layout_editor_absoluteY="0dp" />
 
