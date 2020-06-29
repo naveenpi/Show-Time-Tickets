@@ -90,6 +90,19 @@ public class SignUp extends AppCompatActivity {
                                         Log.d("Failure registration", "user Profile is not created"+ customerID);
                                     }
                                 });
+                                mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Toast.makeText(SignUp.this, "A Verification Email has been sent to the registered Email.", Toast.LENGTH_SHORT).show();
+                                            Log.d("verification Email", "Email sent.");
+                                        }
+                                        else{
+                                            Toast.makeText(SignUp.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    }
+                                });
                                 startActivity(new Intent(getApplicationContext(),MainActivity.class));
                                 finish();
                             }
