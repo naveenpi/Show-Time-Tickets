@@ -35,12 +35,12 @@ public class HomeActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 startActivity(toLogin);
                 return true;
             case R.id.item3:
-                Intent toSignUp=new Intent(this,SignUp.class);
-                startActivity(toSignUp);
-                return true;
-            default:
                 Intent toForgotPassword=new Intent(this,ForgotPassword.class);
                 startActivity(toForgotPassword);
+                return true;
+            default:
+                Intent toSignUP=new Intent(this,SignUp.class);
+                startActivity(toSignUP);
                 return true;
         }
     }
