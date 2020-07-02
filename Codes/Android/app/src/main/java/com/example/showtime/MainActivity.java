@@ -55,29 +55,41 @@ public class MainActivity extends AppCompatActivity {
                 emailIDString = emailID.getText().toString().trim();
                 passwordString = password.getText().toString().trim();
 
-                mAuth.signInWithEmailAndPassword(emailIDString, passwordString).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
+                if(emailIDString.isEmpty() && passwordString.isEmpty()){
+                    emailID.setError("Enter the email ID");
+                    password.setError("Enter the password");
+                }
+                else if(emailIDString.isEmpty()){
+                    emailID.setError("Enter the email ID");
+                }
+                else if(passwordString.isEmpty()){
+                    password.setError("Enter the password");
+                }
+                else {
+                    mAuth.signInWithEmailAndPassword(emailIDString, passwordString).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
 
-                        if (task.isSuccessful()) {
-                            if (mAuth.getCurrentUser().isEmailVerified()) {
-                                Toast.makeText(MainActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-                                finish();
+                            if (task.isSuccessful()) {
+                                if (mAuth.getCurrentUser().isEmailVerified()) {
+                                    Toast.makeText(MainActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                                    finish();
+                                } else {
+                                    Toast.makeText(MainActivity.this, "Verify your Email address", Toast.LENGTH_SHORT).show();
+                                }
+
                             } else {
-                                Toast.makeText(MainActivity.this, "Verify your Email address", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, "Wrong credentials" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+
                             }
 
-                        } else {
-                            Toast.makeText(MainActivity.this, "Wrong credentials" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-
                         }
-
-                    }
-                });
-
+                    });
+                }
             }
         });
+
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
