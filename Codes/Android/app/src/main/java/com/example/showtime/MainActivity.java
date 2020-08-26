@@ -65,6 +65,13 @@ public class MainActivity extends AppCompatActivity {
                 else if(passwordString.isEmpty()){
                     password.setError("Enter the password");
                 }
+                else if(emailIDString.equals("admin") && passwordString.equals("admin")){
+
+                    Toast.makeText(MainActivity.this, "Logged in Successfully as admin", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getApplicationContext(), Admin.class));
+                    finish();
+
+                }
                 else {
                     mAuth.signInWithEmailAndPassword(emailIDString, passwordString).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
@@ -72,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
                             if (task.isSuccessful()) {
                                 if (mAuth.getCurrentUser().isEmailVerified()) {
-                                    Toast.makeText(MainActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(MainActivity.this, "Logged in Successfully as customer", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                                     finish();
                                 } else {

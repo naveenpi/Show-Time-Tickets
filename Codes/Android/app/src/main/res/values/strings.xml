@@ -12,4 +12,7 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="to_Sign_Up">"Do not have an account?"</string>
+    <string name="admin">"Admin Console"</string>
+    <string name="movie_list">"Movies List"</string>
+    <string name="logout">"Logout"</string>
 </resources>

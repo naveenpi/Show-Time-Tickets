@@ -11,7 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MovieDetails"></activity>
+        <activity android:name=".DeleteMovies"></activity>
+        <activity android:name=".AddMovies" />
+        <activity android:name=".Admin" />
+        <activity android:name=".MovieDetails" />
         <activity android:name=".ForgotPassword" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".SignUp" />
