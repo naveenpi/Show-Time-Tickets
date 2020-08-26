@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PaymentActivity"></activity>
+        <activity android:name=".SeatingActivity"></activity>
+        <activity android:name=".PaymentActivity" />
         <activity android:name=".DeleteMovies" />
         <activity android:name=".AddMovies" />
         <activity android:name=".Admin" />
