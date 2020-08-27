@@ -1,7 +1,6 @@
 package com.example.showtime;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
 public class DeleteMovies extends AppCompatActivity {

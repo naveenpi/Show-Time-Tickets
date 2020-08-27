@@ -39,46 +39,46 @@ public class HomeActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         b3=findViewById(R.id.textView3);
         b4=findViewById(R.id.textView4);
 
-        b1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent toDetails=new Intent(HomeActivity.this, MovieDetails.class);
-                toDetails.putExtra("movieId","bahubali2");
-                startActivity(toDetails);
-            }
-        });
-
-        b2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent toDetails=new Intent(HomeActivity.this, MovieDetails.class);
-                toDetails.putExtra("movieId","avengers");
-                startActivity(toDetails);
-
-            }
-        });
-
-        b3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent toDetails=new Intent(HomeActivity.this, MovieDetails.class);
-                toDetails.putExtra("movieId","thor");
-                startActivity(toDetails);
-
-            }
-        });
-
-        b4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent toDetails=new Intent(HomeActivity.this, MovieDetails.class);
-                toDetails.putExtra("movieId","ironman");
-                startActivity(toDetails);
-            }
-        });
+//        b1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                Intent toDetails=new Intent(HomeActivity.this, MovieDetails.class);
+//                toDetails.putExtra("movieId","bahubali2");
+//                startActivity(toDetails);
+//            }
+//        });
+//
+//        b2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                Intent toDetails=new Intent(HomeActivity.this, MovieDetails.class);
+//                toDetails.putExtra("movieId","avengers");
+//                startActivity(toDetails);
+//
+//            }
+//        });
+//
+//        b3.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                Intent toDetails=new Intent(HomeActivity.this, MovieDetails.class);
+//                toDetails.putExtra("movieId","thor");
+//                startActivity(toDetails);
+//
+//            }
+//        });
+//
+//        b4.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent toDetails=new Intent(HomeActivity.this, MovieDetails.class);
+//                toDetails.putExtra("movieId","ironman");
+//                startActivity(toDetails);
+//            }
+//        });
     }
 
     public void menu(View v) {
