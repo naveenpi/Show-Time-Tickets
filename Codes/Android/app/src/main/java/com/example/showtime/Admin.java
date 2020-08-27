@@ -26,6 +26,14 @@ public class Admin extends AppCompatActivity {
                 finish();
             }
         });
+
+        delete_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),DeleteMovies.class));
+                finish();
+            }
+        });
     }
 
 

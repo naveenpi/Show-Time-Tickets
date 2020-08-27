@@ -20,8 +20,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -43,14 +45,13 @@ public class AddMovies extends AppCompatActivity {
     EditText movieName_EditText,genre_EditText,rating_EditText,ticket_price_EditText;
     String movieName_Text, genre_Text, rating_Text, ticketPrice_Text;
     ImageView movieImage;
+    String profileImageUrl="";
     Button addMovie,uploadImg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_movies);
-
-
 
         movieName_EditText=findViewById(R.id.MovieName);
         genre_EditText=findViewById(R.id.Genre);
@@ -92,11 +93,11 @@ public class AddMovies extends AppCompatActivity {
                 ticketPrice_Text = ticket_price_EditText.getText().toString();
 
                 Map<String,Object> movies= new HashMap<>();
-                movies.put("MovieName",movieName_Text);
-                movies.put("Genre",genre_Text);
-                movies.put("Rating",rating_Text);
-                movies.put("TicketPrice",ticketPrice_Text);
-                movies.put("ImgReference",ref.getPath());
+                movies.put("movieName",movieName_Text);
+                movies.put("genre",genre_Text);
+                movies.put("rating",rating_Text);
+                movies.put("ticketPrice",ticketPrice_Text);
+                movies.put("imgReference",profileImageUrl);
                 Log.d("movie data",movies.toString());
 
                 db.collection("movie")
@@ -139,6 +140,14 @@ public class AddMovies extends AppCompatActivity {
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
                         Toast.makeText(AddMovies.this,"uploaded the image",Toast.LENGTH_LONG).show();
+
+                        ref.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Uri> task) {
+                                profileImageUrl=task.getResult().toString();
+                                Log.d("URL",profileImageUrl);
+                            }
+                        });
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
