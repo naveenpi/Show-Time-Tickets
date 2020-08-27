@@ -2,6 +2,7 @@ package com.example.showtime;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,7 +29,7 @@ public class DeleteMovies extends AppCompatActivity {
 
     RecyclerView recyclerView;
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-    FirestoreRecyclerAdapter adapter;
+    MovieAdapter adapter;
     StorageReference ref= FirebaseStorage.getInstance().getReference();
 
 
@@ -38,76 +39,56 @@ public class DeleteMovies extends AppCompatActivity {
         setContentView(R.layout.activity_delete_movies);
         recyclerView = findViewById(R.id.recyclerView_List);
 
-        Query query = firebaseFirestore.collection("movie");
+        constructRecyclerView();
 
+    }
+
+    private void constructRecyclerView() {
+
+        Query query = firebaseFirestore.collection("movie");
         FirestoreRecyclerOptions<MoviesModel> response = new FirestoreRecyclerOptions.Builder<MoviesModel>()
                 .setQuery(query, MoviesModel.class)
                 .build();
         Log.d("query","This is query: "+query.toString());
-        //Log.println(1,"query")
-        adapter = new FirestoreRecyclerAdapter<MoviesModel, MovieViewHolder>(response) {
-            @NonNull
-            @Override
-            public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
-                return new MovieViewHolder(view);
-            }
 
-            @Override
-            protected void onBindViewHolder(@NonNull MovieViewHolder holder, int position,  MoviesModel model) {
-
-//                model = new MoviesModel();
-                //holder.movieImage.setImageURI(Uri.parse(model.getImgReference()));
-                //Log.d("image path","image path: "+ref.child(model.getImgReference()).getDownloadUrl());
-
-//                final String[] uriString = new String[1];
-//                ref.child(model.getImgReference()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                    @Override
-//                    public void onSuccess(Uri uri) {
-//
-//                        uriString[0] =uri.toString();
-//
-//                    }
-//                });
-                Log.d("image path","image path: "+model.getImgReference());
-                Glide.with(getApplicationContext())
-                        .load(model.getImgReference())
-                        .override(70,194)
-                        .placeholder(R.drawable.ic_launcher_foreground)
-                        .into(holder.movieImage);
-                holder.movieName.setText(model.getMovieName());
-                Log.d("from database",model.getMovieName());
-                holder.genre.setText(model.getGenre());
-                holder.rating.setText(model.getRating());
-                holder.price.setText(model.getTicketPrice());
-
-
-            }
-        };
-
+        adapter = new MovieAdapter(response);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT |ItemTouchHelper.RIGHT) {
+
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+
+                adapter.deleteItem(viewHolder.getAdapterPosition());
+            }
+        }).attachToRecyclerView(recyclerView);
+
     }
 
-    private class MovieViewHolder extends RecyclerView.ViewHolder {
-
-        private ImageView movieImage;
-        private TextView movieName;
-        private TextView genre;
-        private TextView rating;
-        private TextView price;
-
-        public MovieViewHolder(@NonNull View itemView) {
-            super(itemView);
-            movieImage=itemView.findViewById(R.id.image_List);
-            movieName = itemView.findViewById(R.id.MovieName_List);
-            genre = itemView.findViewById(R.id.Genre_List);
-            rating=itemView.findViewById(R.id.Rating_List);
-            price=itemView.findViewById(R.id.TicketPrice_List);
-        }
-    }
+//    private class MovieViewHolder extends RecyclerView.ViewHolder {
+//
+//        private ImageView movieImage;
+//        private TextView movieName;
+//        private TextView genre;
+//        private TextView rating;
+//        private TextView price;
+//
+//        public MovieViewHolder(@NonNull View itemView) {
+//            super(itemView);
+//            movieImage=itemView.findViewById(R.id.image_List);
+//            movieName = itemView.findViewById(R.id.MovieName_List);
+//            genre = itemView.findViewById(R.id.Genre_List);
+//            rating=itemView.findViewById(R.id.Rating_List);
+//            price=itemView.findViewById(R.id.TicketPrice_List);
+//        }
+//    }
 
     @Override
     protected void onStop() {
