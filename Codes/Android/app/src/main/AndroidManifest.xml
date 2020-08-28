@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".OrderCart"></activity>
+        <activity android:name=".TimeActivity"></activity>
+        <activity android:name=".OrderCart" />
         <activity android:name=".SeatingActivity" />
         <activity android:name=".PaymentActivity" />
         <activity android:name=".DeleteMovies" />
