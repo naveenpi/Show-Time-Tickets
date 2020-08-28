@@ -85,9 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
                             } else {
                                 Toast.makeText(MainActivity.this, "Wrong credentials" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-
                             }
-
                         }
                     });
                 }
@@ -98,9 +96,7 @@ public class MainActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 startActivity(new Intent(getApplicationContext(), SignUp.class));
-
             }
         });
 
@@ -109,7 +105,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), ForgotPassword.class));
                 Log.d("toForgot", "forgot");
-
             }
         });
 
