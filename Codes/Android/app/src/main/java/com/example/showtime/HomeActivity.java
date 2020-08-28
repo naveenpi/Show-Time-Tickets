@@ -1,6 +1,7 @@
 package com.example.showtime;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,12 +29,13 @@ public class HomeActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+    RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-
+        recyclerView=findViewById(R.id.recycler_home);
         b1=findViewById(R.id.textView);
         b2=findViewById(R.id.textView2);
         b3=findViewById(R.id.textView3);
