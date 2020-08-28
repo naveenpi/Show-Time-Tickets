@@ -72,23 +72,6 @@ public class DeleteMovies extends AppCompatActivity {
 
     }
 
-//    private class MovieViewHolder extends RecyclerView.ViewHolder {
-//
-//        private ImageView movieImage;
-//        private TextView movieName;
-//        private TextView genre;
-//        private TextView rating;
-//        private TextView price;
-//
-//        public MovieViewHolder(@NonNull View itemView) {
-//            super(itemView);
-//            movieImage=itemView.findViewById(R.id.image_List);
-//            movieName = itemView.findViewById(R.id.MovieName_List);
-//            genre = itemView.findViewById(R.id.Genre_List);
-//            rating=itemView.findViewById(R.id.Rating_List);
-//            price=itemView.findViewById(R.id.TicketPrice_List);
-//        }
-//    }
 
     @Override
     protected void onStop() {

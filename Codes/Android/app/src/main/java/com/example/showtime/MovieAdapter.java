@@ -30,7 +30,6 @@ public class MovieAdapter extends FirestoreRecyclerAdapter<MoviesModel, MovieAda
         Picasso.get().load(model.getImgReference()).into(holder.movieImage);
         Log.d("image path","image path: "+model.getImgReference());
         holder.movieName.setText(model.getMovieName());
-        Log.d("from database",model.getMovieName());
         holder.genre.setText(model.getGenre());
         holder.rating.setText(model.getRating());
         holder.price.setText(model.getTicketPrice());

@@ -70,7 +70,6 @@ public class AddMovies extends AppCompatActivity {
 
                 FileChooser();
 
-
             }
         });
 

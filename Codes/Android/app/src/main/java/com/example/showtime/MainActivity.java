@@ -46,8 +46,6 @@ public class MainActivity extends AppCompatActivity {
         emailID = findViewById(R.id.emailID_Login);
         password = findViewById(R.id.password_Login);
 
-        //startAnimation();
-
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
 
                     Toast.makeText(MainActivity.this, "Logged in Successfully as admin", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(), Admin.class));
-                    finish();
 
                 }
                 else {
@@ -81,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                                 if (mAuth.getCurrentUser().isEmailVerified()) {
                                     Toast.makeText(MainActivity.this, "Logged in Successfully as customer", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-                                    finish();
+
                                 } else {
                                     Toast.makeText(MainActivity.this, "Verify your Email address", Toast.LENGTH_SHORT).show();
                                 }
@@ -103,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 startActivity(new Intent(getApplicationContext(), SignUp.class));
-                finish();
+
             }
         });
 
@@ -112,29 +109,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), ForgotPassword.class));
                 Log.d("toForgot", "forgot");
-                finish();
+
             }
         });
-
-//
-//    private void startAnimation() {
-//
-//        while (!login.isPressed()) {
-//            ImageView reelIcon = (ImageView) findViewById(R.id.animation);
-//            float reelIconValue = reelIcon.getY();
-//            ObjectAnimator animateXAxis = ObjectAnimator.ofFloat( reelIcon, "x",reelIcon.getX(), reelIcon.getX() + 100.0f, reelIcon.getX() + 300.0f, reelIcon.getX() + 500.0f);
-//            ObjectAnimator animateYAxis = ObjectAnimator.ofFloat(reelIcon, "y", 250.0f, 100.0f, 600.0f, 700.0f, 100.0f,200.0f);
-//            ObjectAnimator animAlpha = ObjectAnimator.ofFloat(reelIcon, "alpha", 1.0f);
-//            animateXAxis.setDuration(40000);
-//            animateYAxis.setDuration(50000);
-//            animAlpha.setDuration(50000);
-//            animateXAxis.start();
-//            animateYAxis.start();
-//            animAlpha.start();
-//
-//        }
-//    }
-
 
     }
 }

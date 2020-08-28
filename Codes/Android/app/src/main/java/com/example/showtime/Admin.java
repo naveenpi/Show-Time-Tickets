@@ -23,7 +23,6 @@ public class Admin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(),AddMovies.class));
-                finish();
             }
         });
 
@@ -31,7 +30,6 @@ public class Admin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(),DeleteMovies.class));
-                finish();
             }
         });
     }
