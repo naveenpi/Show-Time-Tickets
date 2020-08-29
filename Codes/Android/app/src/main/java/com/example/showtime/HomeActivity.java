@@ -6,16 +6,25 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.telecom.Call;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -37,6 +46,7 @@ public class HomeActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     RecyclerView recyclerView;
     MovieAdapter adapter;
     StorageReference ref= FirebaseStorage.getInstance().getReference();
+    EditText search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +58,11 @@ public class HomeActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         b2=findViewById(R.id.button2_home);
         b3=findViewById(R.id.button3_home);
         b4=findViewById(R.id.button4_home);
+        search=findViewById(R.id.search_Box);
 
-        constructRecyclerView();
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        constructRecyclerView("");
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,21 +88,32 @@ public class HomeActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             @Override
             public void onClick(View v) {
 
+                Log.d("search",search.getText().toString());
+                constructRecyclerView(search.getText().toString());
+                adapter.startListening();
+
             }
         });
+
+
     }
 
-    private void constructRecyclerView() {
 
-        Query query = firebaseFirestore.collection("movie");
+
+    private void constructRecyclerView(String s) {
+
+        Query query = firebaseFirestore.collection("movie").orderBy("movieName").startAt(s).endAt(s+"\uf8ff");
+
+
         FirestoreRecyclerOptions<MoviesModel> response = new FirestoreRecyclerOptions.Builder<MoviesModel>()
                 .setQuery(query, MoviesModel.class)
                 .build();
         Log.d("query","This is query: "+query.toString());
+        Log.d("response","response: "+response.toString());
 
         adapter = new MovieAdapter(response);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //recyclerView.setHasFixedSize(true);
+
         recyclerView.setAdapter(adapter);
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT |ItemTouchHelper.RIGHT) {
@@ -107,16 +130,19 @@ public class HomeActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             }
         }).attachToRecyclerView(recyclerView);
     }
+
     @Override
     protected void onStop() {
         super.onStop();
         adapter.stopListening();
+        Log.d("stop","stop");
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         adapter.startListening();
+        Log.d("start","start");
     }
 
     public void menu(View v) {

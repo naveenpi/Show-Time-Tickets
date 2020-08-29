@@ -24,6 +24,7 @@ public class MovieAdapter extends FirestoreRecyclerAdapter<MoviesModel, MovieAda
     }
 
 
+
     @Override
     protected void onBindViewHolder(@NonNull MovieAdapter.MovieViewHolder holder, int position, @NonNull MoviesModel model) {
 
