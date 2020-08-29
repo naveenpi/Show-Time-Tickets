@@ -107,7 +107,6 @@ public class HomeActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             }
         }).attachToRecyclerView(recyclerView);
     }
-
     @Override
     protected void onStop() {
         super.onStop();
@@ -119,7 +118,7 @@ public class HomeActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         super.onStart();
         adapter.startListening();
     }
-    
+
     public void menu(View v) {
         PopupMenu popup= new PopupMenu(this,v);
         popup.setOnMenuItemClickListener(this);
