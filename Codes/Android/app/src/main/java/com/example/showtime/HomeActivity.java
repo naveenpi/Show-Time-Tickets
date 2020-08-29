@@ -1,6 +1,9 @@
 package com.example.showtime;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -13,12 +16,16 @@ import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import javax.annotation.Nullable;
 
@@ -26,61 +33,79 @@ public class HomeActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 {
 
     TextView b1,b2,b3,b4;
-    FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
-
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
     RecyclerView recyclerView;
+    MovieAdapter adapter;
+    StorageReference ref= FirebaseStorage.getInstance().getReference();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
         recyclerView=findViewById(R.id.recycler_home);
-        b1=findViewById(R.id.textView);
-        b2=findViewById(R.id.textView2);
-        b3=findViewById(R.id.textView3);
-        b4=findViewById(R.id.textView4);
+        b1=findViewById(R.id.button_home);
+        b2=findViewById(R.id.button2_home);
+        b3=findViewById(R.id.button3_home);
+        b4=findViewById(R.id.button4_home);
 
-//        b1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Intent toDetails=new Intent(HomeActivity.this, MovieDetails.class);
-//                toDetails.putExtra("movieId","bahubali2");
-//                startActivity(toDetails);
-//            }
-//        });
-//
-//        b2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Intent toDetails=new Intent(HomeActivity.this, MovieDetails.class);
-//                toDetails.putExtra("movieId","avengers");
-//                startActivity(toDetails);
-//
-//            }
-//        });
-//
-//        b3.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Intent toDetails=new Intent(HomeActivity.this, MovieDetails.class);
-//                toDetails.putExtra("movieId","thor");
-//                startActivity(toDetails);
-//
-//            }
-//        });
-//
-//        b4.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent toDetails=new Intent(HomeActivity.this, MovieDetails.class);
-//                toDetails.putExtra("movieId","ironman");
-//                startActivity(toDetails);
-//            }
-//        });
+        constructRecyclerView();
+
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        b2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        b3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        b4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
+
+    private void constructRecyclerView() {
+
+        Query query = firebaseFirestore.collection("movie");
+        FirestoreRecyclerOptions<MoviesModel> response = new FirestoreRecyclerOptions.Builder<MoviesModel>()
+                .setQuery(query, MoviesModel.class)
+                .build();
+        Log.d("query","This is query: "+query.toString());
+
+        adapter = new MovieAdapter(response);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT |ItemTouchHelper.RIGHT) {
+
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+
+                adapter.deleteItem(viewHolder.getAdapterPosition());
+            }
+        }).attachToRecyclerView(recyclerView);
     }
 
     public void menu(View v) {
@@ -89,6 +114,7 @@ public class HomeActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         popup.inflate(R.menu.navigation_menu);
         popup.show();
     }
+
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()){
@@ -108,6 +134,7 @@ public class HomeActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 return true;
         }
     }
+
     public void logout(View view) {
         FirebaseAuth.getInstance().signOut();
         startActivity(new Intent(getApplicationContext(),MainActivity.class));
