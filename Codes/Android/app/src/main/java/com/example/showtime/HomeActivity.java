@@ -26,6 +26,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -33,6 +35,8 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -47,7 +51,7 @@ public class HomeActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     MovieAdapter adapter;
     StorageReference ref= FirebaseStorage.getInstance().getReference();
     EditText search;
-
+    Boolean i=true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,11 +126,13 @@ public class HomeActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
         Query query = firebaseFirestore.collection("movie").orderBy("movieName").startAt(s).endAt(s+"\uf8ff");
 
+        if(!testQuery(s))
+            query = firebaseFirestore.collection("movie").orderBy("genre").startAt(s).endAt(s + "\uf8ff");
 
         FirestoreRecyclerOptions<MoviesModel> response = new FirestoreRecyclerOptions.Builder<MoviesModel>()
                 .setQuery(query, MoviesModel.class)
                 .build();
-        Log.d("query","This is query: "+query.toString());
+        //Log.d("query","This is query: "+query.get().getResult().toString());
         Log.d("response","response: "+response.toString());
 
         adapter = new MovieAdapter(response);
@@ -147,6 +153,25 @@ public class HomeActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 adapter.deleteItem(viewHolder.getAdapterPosition());
             }
         }).attachToRecyclerView(recyclerView);
+    }
+
+    private boolean testQuery(String s) {
+
+        firebaseFirestore.collection("movie").orderBy("movieName").startAt(s).endAt(s+"\uf8ff").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (!task.getResult().isEmpty()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Log.d("query success", document.getId() + " => " + document.getData());
+                        i=true;
+                    }
+                } else {
+                    Log.d("query fail", "Error getting documents: ", task.getException());
+                    i=false;
+                }
+            }
+        });
+        return i;
     }
 
     @Override
