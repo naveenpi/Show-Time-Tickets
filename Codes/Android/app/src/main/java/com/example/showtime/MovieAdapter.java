@@ -14,16 +14,25 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.squareup.picasso.Picasso;
 
 public class MovieAdapter extends FirestoreRecyclerAdapter<MoviesModel, MovieAdapter.MovieViewHolder> {
 
 
+    private OnItemClickListener listener;
     public MovieAdapter(@NonNull FirestoreRecyclerOptions options) {
         super(options);
     }
 
+    public interface OnItemClickListener{
 
+        void clickOnItem(DocumentSnapshot documentSnapshot, int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.listener = listener;
+    }
 
     @Override
     protected void onBindViewHolder(@NonNull MovieAdapter.MovieViewHolder holder, int position, @NonNull MoviesModel model) {
@@ -47,7 +56,7 @@ public class MovieAdapter extends FirestoreRecyclerAdapter<MoviesModel, MovieAda
         getSnapshots().getSnapshot(position).getReference().delete();
     }
 
-     class MovieViewHolder extends RecyclerView.ViewHolder {
+    class MovieViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView movieImage;
         private TextView movieName;
@@ -62,6 +71,19 @@ public class MovieAdapter extends FirestoreRecyclerAdapter<MoviesModel, MovieAda
             genre = itemView.findViewById(R.id.Genre_List);
             rating=itemView.findViewById(R.id.Rating_List);
             price=itemView.findViewById(R.id.TicketPrice_List);
+
+            itemView.setOnClickListener(new View.OnClickListener(){
+
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if(position != RecyclerView.NO_POSITION && listener != null){
+                        listener.clickOnItem(getSnapshots().getSnapshot(position),position);
+                    }
+                }
+            });
         }
     }
+
+
 }
