@@ -8,10 +8,10 @@ public class MoviesModel {
     private String rating;
     private String ticketPrice;
 
-    private MoviesModel() {
+    public MoviesModel() {
     }
 
-    private MoviesModel(String genre, String imgReference, String movieName, String rating, String ticketPrice) {
+    public MoviesModel(String genre, String imgReference, String movieName, String rating, String ticketPrice) {
         this.genre = genre;
         this.imgReference = imgReference;
         this.movieName = movieName;
