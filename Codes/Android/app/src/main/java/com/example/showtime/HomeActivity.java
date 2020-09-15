@@ -153,6 +153,18 @@ public class HomeActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 adapter.deleteItem(viewHolder.getAdapterPosition());
             }
         }).attachToRecyclerView(recyclerView);
+
+        adapter.setOnItemClickListener(new MovieAdapter.OnItemClickListener() {
+            @Override
+            public void clickOnItem(DocumentSnapshot documentSnapshot, int position) {
+
+                Intent i = new Intent(getApplicationContext(),TimeActivity.class);
+                Log.d("intent ",documentSnapshot.get("movieName").toString());
+                i.putExtra("movieName",documentSnapshot.get("movieName").toString());
+                startActivity(i);
+
+            }
+        });
     }
 
     private boolean testQuery(String s) {
