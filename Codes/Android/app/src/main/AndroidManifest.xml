@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PaymentConsole"></activity>
+        <activity android:name=".TicketCount"></activity>
+        <activity android:name=".PaymentConsole" />
         <activity android:name=".TimeActivity" />
         <activity android:name=".OrderCart" />
         <activity android:name=".SeatingActivity" />
