@@ -232,4 +232,22 @@ public class HomeActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         startActivity(new Intent(getApplicationContext(),MainActivity.class));
         finish();
     }
+
+    BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.navigation_home:
+                            openFragment(HomeFragment.newInstance("", ""));
+                            return true;
+                        case R.id.navigation_sms:
+                            openFragment(SmsFragment.newInstance("", ""));
+                            return true;
+                        case R.id.navigation_notifications:
+                            openFragment(NotificationFragment.newInstance("", ""));
+                            return true;
+                    }
+                    return false;
+                }
+            };
 }
