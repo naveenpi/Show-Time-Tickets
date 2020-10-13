@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DeletePayments"></activity>
+        <activity android:name=".LiveChatAdmin"></activity>
+        <activity android:name=".LiveChat" />
+        <activity android:name=".DeletePayments" />
         <activity android:name=".TicketCount" />
         <activity android:name=".PaymentConsole" />
         <activity android:name=".TimeActivity" />

@@ -474,7 +474,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/mybutton"
-        android:text="Proceed to payment"
+        android:text="Add to Cart"
         android:textStyle="bold"
         android:textColor="@color/btnColor"
         android:textAllCaps="false"

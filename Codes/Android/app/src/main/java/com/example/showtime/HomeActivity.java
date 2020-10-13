@@ -16,18 +16,16 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+//import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+//import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationMenu;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -52,50 +50,21 @@ public class HomeActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     StorageReference ref= FirebaseStorage.getInstance().getReference();
     EditText search;
     Boolean i=true;
+    BottomNavigationView bottom;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
         recyclerView=findViewById(R.id.recycler_home);
-        b1=findViewById(R.id.button_home);
-        b2=findViewById(R.id.button2_home);
-        b3=findViewById(R.id.button3_home);
-        b4=findViewById(R.id.button4_home);
-        search=findViewById(R.id.search_Box);
 
+        search=findViewById(R.id.search_Box);
+        bottom = findViewById(R.id.bottom_navigation);
+        bottom.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         constructRecyclerView("");
-        b1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
-
-        b2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        b3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        b4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-
-            }
-        });
 
         search.addTextChangedListener(new TextWatcher() {
             @Override
@@ -205,6 +174,7 @@ public class HomeActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         popup.setOnMenuItemClickListener(this);
         popup.inflate(R.menu.navigation_menu);
         popup.show();
+
     }
 
     @Override
@@ -220,6 +190,7 @@ public class HomeActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 Intent toForgotPassword=new Intent(this,ForgotPassword.class);
                 startActivity(toForgotPassword);
                 return true;
+
             default:
                 Intent toSignUP=new Intent(this,SignUp.class);
                 startActivity(toSignUP);
@@ -227,9 +198,38 @@ public class HomeActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         }
     }
 
+    BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener=new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+            switch (menuItem.getItemId()){
+                case R.id.bottom_item1:
+                    Log.d("bottom",": payments");
+                    startActivity(new Intent(getApplicationContext(),PaymentConsole.class));
+                    return true;
+                case R.id.bottom_item2:
+                    startActivity(new Intent(getApplicationContext(),OrderCart.class));
+                    return true;
+                case R.id.bottom_item3:
+                    return true;
+//                case R.id.bottom_item4:
+//                    startActivity(new Intent(getApplicationContext(),OrderCart.class));
+//                    return true;
+                case R.id.bottom_item5:
+                    startActivity(new Intent(getApplicationContext(),LiveChat.class));
+                    return true;
+            }
+            return false;
+        }
+    };
     public void logout(View view) {
         FirebaseAuth.getInstance().signOut();
         startActivity(new Intent(getApplicationContext(),MainActivity.class));
         finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        startActivity(new Intent(getApplicationContext(),MainActivity.class));
     }
 }
