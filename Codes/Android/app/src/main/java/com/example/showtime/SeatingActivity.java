@@ -2,12 +2,18 @@ package com.example.showtime;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.app.AlertDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,7 +27,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -34,6 +39,7 @@ import java.util.Map;
 
 public class SeatingActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private static final String CHANNEL_ID = "notification";
     TableLayout seats_tableLayout;
     int actual_seats_selected = 0;
     int no_of_seats = 0;
@@ -52,6 +58,8 @@ public class SeatingActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seating);
+//        createNotificationChannel();
+
 
         seats_proceed = findViewById(R.id.seats_proceed);
         i = getIntent();
@@ -150,6 +158,7 @@ public class SeatingActivity extends AppCompatActivity implements View.OnClickLi
                     booking.put("movieName",i.getStringExtra("movieName"));
                     booking.put("date",i.getStringExtra("date"));
                     booking.put("time",i.getStringExtra("time"));
+                    booking.put("payment","no");
                     booking.put("seats",removeLastChar(seats_selected_string));
 
                     db.collection("booking").add(booking).
@@ -157,6 +166,8 @@ public class SeatingActivity extends AppCompatActivity implements View.OnClickLi
                                 @Override
                                 public void onSuccess(DocumentReference documentReference) {
                                     Log.d("Yes booking", " booking confirmed ");
+
+                                    addNotification();
                                     startActivity(new Intent(getApplicationContext(),HomeActivity.class));
                                     finish();
                                 }
@@ -182,6 +193,41 @@ public class SeatingActivity extends AppCompatActivity implements View.OnClickLi
                 }
             }
         }
+    }
+
+
+    private void addNotification() {
+
+        Intent notificationIntent = new Intent(SeatingActivity. this, OrderCart. class );
+        notificationIntent.addCategory(Intent. CATEGORY_LAUNCHER ) ;
+        notificationIntent.setAction(Intent. ACTION_MAIN ) ;
+        notificationIntent.setFlags(Intent. FLAG_ACTIVITY_CLEAR_TOP | Intent. FLAG_ACTIVITY_SINGLE_TOP );
+        PendingIntent resultIntent = PendingIntent. getActivity (SeatingActivity. this, 0 , notificationIntent , 0 ) ;
+
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_movie_black_24dp)
+                .setContentTitle("Show Time Tickets")
+                .setContentText("Tickets are added to the cart")
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText("Please complete the payment"))
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(resultIntent);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Seating channel";
+            String description = "channel for adding to the cart";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+            Log.d("new notification","Notification");
+            notificationManager.notify(100,builder.build());
+        }
+
+
     }
 
     private static String removeLastChar(String str) {
