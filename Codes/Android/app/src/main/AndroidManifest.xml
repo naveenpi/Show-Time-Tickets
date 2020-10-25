@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ViewTicket"></activity>
+        <activity android:name=".CheckOutPayments"></activity>
+        <activity android:name=".ViewTicket" />
         <activity android:name=".LiveChat" />
         <activity android:name=".Faq" />
         <activity android:name=".EditProfile" />
