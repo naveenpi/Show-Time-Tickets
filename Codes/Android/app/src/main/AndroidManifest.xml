@@ -12,7 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CheckOutPayments"></activity>
+        <activity android:name=".LiveChatAdmin"></activity>
+        <activity android:name=".DeleteFaq" />
+        <activity android:name=".CheckHistory" />
+        <activity android:name=".AdminFaq" />
+        <activity android:name=".CheckOutPayments" />
         <activity android:name=".ViewTicket" />
         <activity android:name=".LiveChat" />
         <activity android:name=".Faq" />
