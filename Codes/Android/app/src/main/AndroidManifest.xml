@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+<<<<<<< HEAD
         <activity android:name=".EditProfile"></activity>
         <activity android:name=".CheckHistory" />
         <activity android:name=".DeleteFaq" />
@@ -22,6 +23,18 @@
         <activity android:name=".ViewTicket" />
         <activity android:name=".LiveChatAdmin" />
         <activity android:name=".LiveChat" />
+=======
+        <activity android:name=".LiveChatAdmin"></activity>
+        <activity android:name=".DeleteFaq" />
+        <activity android:name=".CheckHistory" />
+        <activity android:name=".AdminFaq" />
+        <activity android:name=".CheckOutPayments" />
+        <activity android:name=".ViewTicket" />
+        <activity android:name=".LiveChat" />
+        <activity android:name=".Faq" />
+        <activity android:name=".EditProfile" />
+        <activity android:name=".CheckOut" />
+>>>>>>> a1336ba934cd6df9164ed9aa8b5cfb0a243d6ae8
         <activity android:name=".DeletePayments" />
         <activity android:name=".TicketCount" />
         <activity android:name=".PaymentConsole" />

@@ -47,53 +47,53 @@
         app:layout_constraintTop_toBottomOf="@+id/Seats_check_out" />
 
     <!--    <TextView-->
-<!--        android:id="@+id/Seats_check_out"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@id/TicketPrice_List_Check_out"-->
-<!--        android:layout_marginEnd="337dp"-->
-<!--        android:text="Details"-->
-<!--        android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="@id/TicketPrice_List_Check_out"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/TicketPrice_List_Check_out"-->
-<!--        app:layout_constraintVertical_bias="0.02" />-->
-<!--    <TextView-->
-<!--        android:id="@+id/Genre_List_Check_out"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@id/MovieName_List_Check_out"-->
-<!--        android:layout_marginStart="20dp"-->
-<!--        android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
-<!--        android:text="Genre"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/MovieName_List_Check_out"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/MovieName_List_Check_out"-->
-<!--        app:layout_constraintVertical_bias="0.02" />-->
+    <!--        android:id="@+id/Seats_check_out"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_below="@id/TicketPrice_List_Check_out"-->
+    <!--        android:layout_marginEnd="337dp"-->
+    <!--        android:text="Details"-->
+    <!--        android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="@id/TicketPrice_List_Check_out"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/TicketPrice_List_Check_out"-->
+    <!--        app:layout_constraintVertical_bias="0.02" />-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/Genre_List_Check_out"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_below="@id/MovieName_List_Check_out"-->
+    <!--        android:layout_marginStart="20dp"-->
+    <!--        android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
+    <!--        android:text="Genre"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="@+id/MovieName_List_Check_out"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/MovieName_List_Check_out"-->
+    <!--        app:layout_constraintVertical_bias="0.02" />-->
 
-<!--    <TextView-->
-<!--        android:id="@+id/Rating_List_Check_out"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@id/Genre_List_Check_out"-->
-<!--        android:text="Rating"-->
-<!--        android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/Genre_List_Check_out"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/Genre_List_Check_out"-->
-<!--        app:layout_constraintVertical_bias="0.02" />-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/Rating_List_Check_out"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_below="@id/Genre_List_Check_out"-->
+    <!--        android:text="Rating"-->
+    <!--        android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="@+id/Genre_List_Check_out"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/Genre_List_Check_out"-->
+    <!--        app:layout_constraintVertical_bias="0.02" />-->
 
-<!--    <TextView-->
-<!--        android:id="@+id/TicketPrice_List_Check_out"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@id/Rating_List_Check_out"-->
-<!--        android:layout_marginEnd="337dp"-->
-<!--        android:text="Ticket Price"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/Rating_List_Check_out"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/Rating_List_Check_out"-->
-<!--        app:layout_constraintVertical_bias="0.02" />-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/TicketPrice_List_Check_out"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_below="@id/Rating_List_Check_out"-->
+    <!--        android:layout_marginEnd="337dp"-->
+    <!--        android:text="Ticket Price"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="@+id/Rating_List_Check_out"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/Rating_List_Check_out"-->
+    <!--        app:layout_constraintVertical_bias="0.02" />-->
 
 
 
