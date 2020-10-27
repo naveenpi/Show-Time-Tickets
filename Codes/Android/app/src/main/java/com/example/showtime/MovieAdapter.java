@@ -38,6 +38,7 @@ public class MovieAdapter extends FirestoreRecyclerAdapter<MoviesModel, MovieAda
     protected void onBindViewHolder(@NonNull MovieAdapter.MovieViewHolder holder, int position, @NonNull MoviesModel model) {
 
         Picasso.get().load(model.getImgReference()).into(holder.movieImage);
+//        holder.movieImage.setImageResource(R.drawable.bahubali);
         Log.d("image path","image path: "+model.getImgReference());
         holder.movieName.setText("Movie: "+model.getMovieName());
         holder.genre.setText("Genre: "+model.getGenre());

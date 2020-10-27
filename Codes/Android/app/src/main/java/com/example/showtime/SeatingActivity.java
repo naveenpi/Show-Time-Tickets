@@ -158,6 +158,7 @@ public class SeatingActivity extends AppCompatActivity implements View.OnClickLi
                     booking.put("movieName",i.getStringExtra("movieName"));
                     booking.put("date",i.getStringExtra("date"));
                     booking.put("time",i.getStringExtra("time"));
+                    booking.put("payment","no");
                     booking.put("seats",removeLastChar(seats_selected_string));
 
                     db.collection("booking").add(booking).
@@ -193,6 +194,7 @@ public class SeatingActivity extends AppCompatActivity implements View.OnClickLi
             }
         }
     }
+
 
     private void addNotification() {
 

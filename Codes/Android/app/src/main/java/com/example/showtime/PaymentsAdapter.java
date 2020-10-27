@@ -11,16 +11,25 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 public class PaymentsAdapter extends FirestoreRecyclerAdapter<PaymentsModel, PaymentsAdapter.PaymentViewHolder> {
 
 
+    private PaymentsAdapter.OnItemClickListener listener;
+    public interface OnItemClickListener{
 
+        void clickOnItem(DocumentSnapshot documentSnapshot, int position);
+    }
 
     public PaymentsAdapter(@NonNull FirestoreRecyclerOptions options) {
         super(options);
     }
 
+
+    public void setOnItemClickListener(PaymentsAdapter.OnItemClickListener listener){
+        this.listener = listener;
+    }
     @Override
     protected void onBindViewHolder(@NonNull PaymentViewHolder paymentViewHolder, int i, @NonNull PaymentsModel paymentsModel) {
 
@@ -54,6 +63,19 @@ public class PaymentsAdapter extends FirestoreRecyclerAdapter<PaymentsModel, Pay
             nameOnCardList = itemView.findViewById(R.id.NameOnCardList);
             expirationList = itemView.findViewById(R.id.ExpirationList);
             cardHolder = itemView.findViewById(R.id.cardHolder);
+
+            itemView.setOnClickListener(new View.OnClickListener(){
+
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if(position != RecyclerView.NO_POSITION && listener != null){
+                        listener.clickOnItem(getSnapshots().getSnapshot(position),position);
+                    }
+                }
+            });
         }
+
+
     }
 }

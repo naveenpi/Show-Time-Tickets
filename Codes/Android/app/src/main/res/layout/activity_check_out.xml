@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CheckOut">
+
+
+    <ImageView
+        android:id="@+id/image_Check_Out"
+        android:layout_width="70dp"
+        android:layout_height="194dp"
+        android:src="@drawable/bahubali"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.005"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/Seats_check_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Movie Name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/image_Check_Out"
+        app:layout_constraintTop_toTopOf="@id/image_Check_Out"
+        app:layout_constraintVertical_bias="0.064" />
+
+    <Button
+        android:id="@+id/button_check_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="168dp"
+        android:layout_marginTop="280dp"
+        android:layout_marginEnd="155dp"
+        android:layout_marginBottom="334dp"
+        android:text="Proceed to payment"
+        android:background="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Seats_check_out" />
+
+    <!--    <TextView-->
+<!--        android:id="@+id/Seats_check_out"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/TicketPrice_List_Check_out"-->
+<!--        android:layout_marginEnd="337dp"-->
+<!--        android:text="Details"-->
+<!--        android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="@id/TicketPrice_List_Check_out"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/TicketPrice_List_Check_out"-->
+<!--        app:layout_constraintVertical_bias="0.02" />-->
+<!--    <TextView-->
+<!--        android:id="@+id/Genre_List_Check_out"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/MovieName_List_Check_out"-->
+<!--        android:layout_marginStart="20dp"-->
+<!--        android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
+<!--        android:text="Genre"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/MovieName_List_Check_out"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/MovieName_List_Check_out"-->
+<!--        app:layout_constraintVertical_bias="0.02" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/Rating_List_Check_out"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/Genre_List_Check_out"-->
+<!--        android:text="Rating"-->
+<!--        android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/Genre_List_Check_out"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/Genre_List_Check_out"-->
+<!--        app:layout_constraintVertical_bias="0.02" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/TicketPrice_List_Check_out"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/Rating_List_Check_out"-->
+<!--        android:layout_marginEnd="337dp"-->
+<!--        android:text="Ticket Price"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/Rating_List_Check_out"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/Rating_List_Check_out"-->
+<!--        app:layout_constraintVertical_bias="0.02" />-->
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

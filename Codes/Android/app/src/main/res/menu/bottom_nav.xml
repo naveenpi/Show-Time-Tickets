@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/bottom_item1"
+        android:icon="@drawable/ic_baseline_credit_card_24"
+        android:title="Payments" />
+
+    <item android:id="@+id/bottom_item2"
+        android:icon="@drawable/ic_baseline_shopping_cart_24"
+        android:title="Cart" />
+
+    <item android:id="@+id/bottom_item3"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Home"/>
+
+    <item android:id="@+id/bottom_item4"
+        android:icon="@drawable/ic_baseline_history_24"
+        android:title="History"/>
+
+    <item android:id="@+id/bottom_item5"
+        android:icon="@drawable/ic_baseline_chat_24"
+        android:title="Live chat"/>
+
+</menu>

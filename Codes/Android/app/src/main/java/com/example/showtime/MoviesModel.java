@@ -19,6 +19,26 @@ public class MoviesModel {
         this.ticketPrice = ticketPrice;
     }
 
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public void setImgReference(String imgReference) {
+        this.imgReference = imgReference;
+    }
+
+    public void setMovieName(String movieName) {
+        this.movieName = movieName;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
+    public void setTicketPrice(String ticketPrice) {
+        this.ticketPrice = ticketPrice;
+    }
+
     public String getGenre() {
         return genre;
     }

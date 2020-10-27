@@ -12,7 +12,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LiveChatAdmin"></activity>
+        <activity android:name=".EditProfile"></activity>
+        <activity android:name=".CheckHistory" />
+        <activity android:name=".DeleteFaq" />
+        <activity android:name=".AdminFaq" />
+        <activity android:name=".Faq" />
+        <activity android:name=".CheckOutPayments" />
+        <activity android:name=".CheckOut" />
+        <activity android:name=".ViewTicket" />
+        <activity android:name=".LiveChatAdmin" />
         <activity android:name=".LiveChat" />
         <activity android:name=".DeletePayments" />
         <activity android:name=".TicketCount" />
@@ -31,6 +39,8 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
+                <data android:mimeType="message/rfc822" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>

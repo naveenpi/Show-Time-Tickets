@@ -191,6 +191,10 @@ public class HomeActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 startActivity(toForgotPassword);
                 return true;
 
+            case R.id.item4:
+                Intent toFaq=new Intent(this,Faq.class);
+                startActivity(toFaq);
+                return true;
             default:
                 Intent toSignUP=new Intent(this,SignUp.class);
                 startActivity(toSignUP);
@@ -211,9 +215,9 @@ public class HomeActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                     return true;
                 case R.id.bottom_item3:
                     return true;
-//                case R.id.bottom_item4:
-//                    startActivity(new Intent(getApplicationContext(),OrderCart.class));
-//                    return true;
+                case R.id.bottom_item4:
+                    startActivity(new Intent(getApplicationContext(),CheckHistory.class));
+                    return true;
                 case R.id.bottom_item5:
                     startActivity(new Intent(getApplicationContext(),LiveChat.class));
                     return true;
