@@ -38,7 +38,7 @@ public class Admin extends AppCompatActivity {
         live_chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),LiveChatAdmin.class));
+                startActivity(new Intent(getApplicationContext(),AdminChatList.class));
             }
         });
         add_faq.setOnClickListener(new View.OnClickListener() {

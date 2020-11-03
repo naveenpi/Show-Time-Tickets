@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -51,35 +52,6 @@ public class LiveChat extends AppCompatActivity {
 
     }
 
-    private void constructRecyclerView() {
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        list_of_messages.setLayoutManager(layoutManager);
-
-        FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
-        CollectionReference applicationsRef = rootRef.collection("chats");
-        DocumentReference applicationIdRef = applicationsRef.document("Live Chat");
-        applicationIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()){
-                    DocumentSnapshot document = task.getResult();
-                    if(document.exists()){
-                        chatList= new ArrayList<ChatMessage>((Collection) document.get("Live Session"));
-
-                        Log.d("recycler chat",chatList.toArray().toString());
-                        adapter = new ChatAdapter(chatList);
-                        list_of_messages.setAdapter(adapter);
-                        list_of_messages.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL));
-                    }
-                }
-            }
-        });
-
-
-
-    }
-
     private void displayChatMessages() {
 
         constructRecyclerView();
@@ -89,8 +61,8 @@ public class LiveChat extends AppCompatActivity {
             public void onClick(View v) {
 
                 FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
-                CollectionReference applicationsRef = rootRef.collection("chats");
-                DocumentReference applicationIdRef = applicationsRef.document("Live Chat");
+                CollectionReference applicationsRef = rootRef.collection("chat");
+                DocumentReference applicationIdRef = applicationsRef.document(FirebaseAuth.getInstance().getCurrentUser().getUid());
                 applicationIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -98,14 +70,37 @@ public class LiveChat extends AppCompatActivity {
                             DocumentSnapshot document = task.getResult();
                             if(document.exists()){
 
-                                chatList= new ArrayList((Collection) document.get("Live Session"));
+                                chatList= new ArrayList((Collection) document.get(FirebaseAuth.getInstance().getCurrentUser().getUid()));
                                 Log.d("chat user",chatList.toString());
-                                Map<String,List<ChatMessage>> chat = new HashMap<>();
-                                chatList.add(new ChatMessage(input.getText().toString(),"Me"));
-                                chat.put("Live Session",chatList);
+                                Map<Object,List<ChatMessage>> chat = new HashMap<>();
+                                chatList.add(new ChatMessage(input.getText().toString(),FirebaseAuth.getInstance().getCurrentUser().getEmail()));
+                                chat.put(FirebaseAuth.getInstance().getCurrentUser().getUid(),chatList);
                                 input.setText("");
-                                db.collection("chats")
-                                        .document("Live Chat")
+                                db.collection("chat")
+                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .set(chat)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Log.d("chat success", "chat sent");
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Log.d("chat failure", "message not sent");
+                                            }
+                                        });
+                                constructRecyclerView();
+                            }
+                            else{
+                                chatList =  new ArrayList<>();
+                                Map<Object,List<ChatMessage>> chat = new HashMap<>();
+                                chatList.add(new ChatMessage(input.getText().toString(),FirebaseAuth.getInstance().getCurrentUser().getEmail()));
+                                chat.put(FirebaseAuth.getInstance().getCurrentUser().getUid(),chatList);
+                                input.setText("");
+                                db.collection("chat")
+                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                         .set(chat)
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
@@ -127,7 +122,113 @@ public class LiveChat extends AppCompatActivity {
 
             }
         });
+
     }
+
+    private void constructRecyclerView() {
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        list_of_messages.setLayoutManager(layoutManager);
+
+        FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
+        CollectionReference applicationsRef = rootRef.collection("chat");
+        DocumentReference applicationIdRef = applicationsRef.document(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        applicationIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+                    if(document.exists()){
+                        chatList= new ArrayList<ChatMessage>((Collection) document.get(FirebaseAuth.getInstance().getCurrentUser().getUid()));
+
+                        Log.d("recycler chat",chatList.toArray().toString());
+                        adapter = new ChatAdapter(chatList);
+                        list_of_messages.setAdapter(adapter);
+                        list_of_messages.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL));
+                    }
+                }
+            }
+        });
+
+    }
+
+//    private void constructRecyclerView() {
+//
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+//        list_of_messages.setLayoutManager(layoutManager);
+//
+//        FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
+//        CollectionReference applicationsRef = rootRef.collection("chats");
+//        DocumentReference applicationIdRef = applicationsRef.document("Live Chat");
+//        applicationIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                if(task.isSuccessful()){
+//                    DocumentSnapshot document = task.getResult();
+//                    if(document.exists()){
+//                        chatList= new ArrayList<ChatMessage>((Collection) document.get("Live Session"));
+//
+//                        Log.d("recycler chat",chatList.toArray().toString());
+//                        adapter = new ChatAdapter(chatList);
+//                        list_of_messages.setAdapter(adapter);
+//                        list_of_messages.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL));
+//                    }
+//                }
+//            }
+//        });
+//
+//
+//
+//    }
+//
+//    private void displayChatMessages() {
+//
+//        constructRecyclerView();
+//
+//        send.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
+//                CollectionReference applicationsRef = rootRef.collection("chats");
+//                DocumentReference applicationIdRef = applicationsRef.document("Live Chat");
+//                applicationIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                        if(task.isSuccessful()){
+//                            DocumentSnapshot document = task.getResult();
+//                            if(document.exists()){
+//
+//                                chatList= new ArrayList((Collection) document.get("Live Session"));
+//                                Log.d("chat user",chatList.toString());
+//                                Map<String,List<ChatMessage>> chat = new HashMap<>();
+//                                chatList.add(new ChatMessage(input.getText().toString(),"Me"));
+//                                chat.put("Live Session",chatList);
+//                                input.setText("");
+//                                db.collection("chats")
+//                                        .document("Live Chat")
+//                                        .set(chat)
+//                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                                            @Override
+//                                            public void onSuccess(Void aVoid) {
+//                                                Log.d("chat success", "chat sent");
+//                                            }
+//                                        })
+//                                        .addOnFailureListener(new OnFailureListener() {
+//                                            @Override
+//                                            public void onFailure(@NonNull Exception e) {
+//                                                Log.d("chat failure", "message not sent");
+//                                            }
+//                                        });
+//                                constructRecyclerView();
+//                            }
+//                        }
+//                    }
+//                });
+//
+//            }
+//        });
+//    }
 
 
 
