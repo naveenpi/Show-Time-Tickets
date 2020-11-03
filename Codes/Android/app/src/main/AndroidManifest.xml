@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".AdminChatList"></activity>
+       <activity android:name=".EditProfile"/>
         <activity android:name=".CheckHistory" />
         <activity android:name=".DeleteFaq" />
         <activity android:name=".AdminFaq" />
