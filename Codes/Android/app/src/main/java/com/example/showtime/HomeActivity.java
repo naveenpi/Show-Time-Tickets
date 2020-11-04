@@ -195,6 +195,11 @@ public class HomeActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 Intent toFaq=new Intent(this,Faq.class);
                 startActivity(toFaq);
                 return true;
+
+            case R.id.item5:
+                Intent toEdit=new Intent(this,EditProfile.class);
+                startActivity(toEdit);
+                return true;
             default:
                 Intent toSignUP=new Intent(this,SignUp.class);
                 startActivity(toSignUP);
