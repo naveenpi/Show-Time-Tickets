@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -14,6 +16,7 @@ import com.google.firebase.firestore.Query;
 
 public class DeleteFaq extends AppCompatActivity {
 
+    AlertDialog.Builder display_alert;
     RecyclerView recyclerView;
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
     FaqAdapter adapter;
@@ -47,9 +50,28 @@ public class DeleteFaq extends AppCompatActivity {
             }
 
             @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            public void onSwiped(@NonNull final RecyclerView.ViewHolder viewHolder, int direction) {
 
-                adapter.deleteItem(viewHolder.getAdapterPosition());
+                display_alert = new AlertDialog.Builder(DeleteFaq.this);
+                display_alert.setTitle("DELETE");
+                display_alert.setMessage("Are You sure? ");
+                display_alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        adapter.deleteItem(viewHolder.getAdapterPosition());
+                        display_alert.create().dismiss();
+                    }
+                });
+                display_alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        display_alert.create().dismiss();
+                        recyclerView.setAdapter(adapter);
+
+                    }
+                });
+                display_alert.show();
+                //adapter.deleteItem(viewHolder.getAdapterPosition());
             }
         }).attachToRecyclerView(recyclerView);
     }

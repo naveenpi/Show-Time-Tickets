@@ -36,7 +36,7 @@ public class ViewTicket extends AppCompatActivity {
     private static final String CHANNEL_ID = "ticket";
     ImageView img;
     TextView text;
-    Button save;
+    Button save, sendEmail;
     Intent i = getIntent();
     String msg ="";
     @Override
@@ -48,6 +48,7 @@ public class ViewTicket extends AppCompatActivity {
         img = findViewById(R.id.image_Ticket);
         text = findViewById(R.id.Seats_Ticket);
         save = findViewById(R.id.button_save);
+        sendEmail = findViewById(R.id.SendEmail);
         msg=i.getStringExtra("details");
         //Log.d("details",i.getStringExtra("details"));
         //System.out.println(i.getStringExtra("details"));
@@ -59,13 +60,20 @@ public class ViewTicket extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                sendEmail();
                 addNotification();
                 addToHistory();
                 startActivity(new Intent(getApplicationContext(),HomeActivity.class));
             }
         });
 
+        sendEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                sendEmail();
+
+            }
+        });
     }
 
     private void addToHistory() {

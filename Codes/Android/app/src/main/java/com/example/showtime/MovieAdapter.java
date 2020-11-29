@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,6 +29,7 @@ public class MovieAdapter extends FirestoreRecyclerAdapter<MoviesModel, MovieAda
     public interface OnItemClickListener{
 
         void clickOnItem(DocumentSnapshot documentSnapshot, int position);
+        void clickOnButton(View v);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener){
@@ -43,7 +45,9 @@ public class MovieAdapter extends FirestoreRecyclerAdapter<MoviesModel, MovieAda
         holder.movieName.setText("Movie: "+model.getMovieName());
         holder.genre.setText("Genre: "+model.getGenre());
         holder.rating.setText("Rating: "+model.getRating());
-        holder.price.setText("Price: "+model.getTicketPrice());
+        holder.price.setText("Price: $"+model.getTicketPrice());
+        holder.theater.setText("Theater: "+model.getTheater());
+        holder.location.setText("Location: "+model.getLocation());
     }
 
     @NonNull
@@ -64,6 +68,9 @@ public class MovieAdapter extends FirestoreRecyclerAdapter<MoviesModel, MovieAda
         private TextView genre;
         private TextView rating;
         private TextView price;
+        private TextView theater;
+        private TextView location;
+        private Button feedback;
 
         public MovieViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -72,6 +79,9 @@ public class MovieAdapter extends FirestoreRecyclerAdapter<MoviesModel, MovieAda
             genre = itemView.findViewById(R.id.Genre_List);
             rating=itemView.findViewById(R.id.Rating_List);
             price=itemView.findViewById(R.id.TicketPrice_List);
+            theater = itemView.findViewById(R.id.Theater_list);
+            location = itemView.findViewById(R.id.Location_list);
+            feedback = itemView.findViewById(R.id.HomeFeedback);
 
             itemView.setOnClickListener(new View.OnClickListener(){
 
@@ -83,6 +93,18 @@ public class MovieAdapter extends FirestoreRecyclerAdapter<MoviesModel, MovieAda
                     }
                 }
             });
+
+            feedback.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    int position = getAdapterPosition();
+                    if(position != RecyclerView.NO_POSITION && listener != null){
+                        listener.clickOnButton(v);
+                    }
+                }
+            });
+
         }
     }
 

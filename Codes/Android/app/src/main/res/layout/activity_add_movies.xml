@@ -65,6 +65,36 @@
         app:layout_constraintTop_toBottomOf="@id/Rating"
         app:layout_constraintVertical_bias="0.077" />
 
+    <EditText
+        android:id="@+id/Theater"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:hint="Theater"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/TicketPrice"
+        app:layout_constraintVertical_bias="0.077" />
+
+    <EditText
+        android:id="@+id/Location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:hint="Location"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Theater"
+        app:layout_constraintVertical_bias="0.077" />
+
     <Button
         android:id="@+id/add_movie"
         android:layout_width="wrap_content"
@@ -75,7 +105,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.535"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/TicketPrice"
+        app:layout_constraintTop_toBottomOf="@id/Location"
         app:layout_constraintVertical_bias="0.16" />
 
     <ImageView

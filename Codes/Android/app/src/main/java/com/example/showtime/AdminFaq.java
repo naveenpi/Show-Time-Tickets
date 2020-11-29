@@ -36,27 +36,40 @@ public class AdminFaq extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Map<String,Object> faq_pair = new HashMap<>();
-                faq_pair.put("question",question.getText().toString());
-                faq_pair.put("answer",answer.getText().toString());
+                if(validations()) {
 
-                FirebaseFirestore.getInstance().collection("Faq")
-                        .add(faq_pair)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Log.d("yes faq", " faq is added ");
-                                Toast.makeText(getApplicationContext(),"Added FAQ",Toast.LENGTH_LONG).show();
-                                startActivity(new Intent(getApplicationContext(),Admin.class));
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.d("No faq", " faq is not added");
-                            }
-                        });
+                    Map<String, Object> faq_pair = new HashMap<>();
+                    faq_pair.put("question", question.getText().toString());
+                    faq_pair.put("answer", answer.getText().toString());
+
+                    FirebaseFirestore.getInstance().collection("Faq")
+                            .add(faq_pair)
+                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                @Override
+                                public void onSuccess(DocumentReference documentReference) {
+                                    Log.d("yes faq", " faq is added ");
+                                    Toast.makeText(getApplicationContext(), "Added FAQ", Toast.LENGTH_LONG).show();
+                                    startActivity(new Intent(getApplicationContext(), Admin.class));
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.d("No faq", " faq is not added");
+                                }
+                            });
+                }
             }
         });
+    }
+
+    private boolean validations() {
+
+        if(question.getText().toString().isEmpty() || answer.getText().toString().isEmpty()){
+            question.setError("Fill the Field");
+            answer.setError("Fill the Field");
+            return false;
+        }
+        return true;
     }
 }

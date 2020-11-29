@@ -53,10 +53,10 @@
         android:id="@+id/SpinnerMonth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="80dp"
         app:layout_constraintStart_toEndOf="@+id/ExpirationMonthText"
-        app:layout_constraintTop_toBottomOf="@+id/NameOnCard" />
+        app:layout_constraintTop_toTopOf="@+id/NameOnCard" />
 
     <TextView
         android:id="@+id/ExpirationYearText"
@@ -80,9 +80,10 @@
         android:layout_marginBottom="392dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.205"
         app:layout_constraintStart_toEndOf="@+id/ExpirationYearText"
-        app:layout_constraintTop_toBottomOf="@+id/SpinnerMonth" />
+        app:layout_constraintTop_toBottomOf="@+id/SpinnerMonth"
+        app:layout_constraintVertical_bias="0.454" />
 
     <Button
         android:id="@+id/AddPayment"

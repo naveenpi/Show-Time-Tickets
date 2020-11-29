@@ -7,17 +7,21 @@ public class OrderModel {
     String movieName;
     String seats;
     String time;
+    String theater;
+    String location;
 
     public OrderModel() {
     }
 
-    public OrderModel(String imgReference, String bookingRef, String date, String movieName, String seats, String time) {
+    public OrderModel(String imgReference, String bookingRef, String date, String movieName, String seats, String time, String theater, String location) {
         this.imgReference = imgReference;
         this.bookingRef = bookingRef;
         this.date = date;
         this.movieName = movieName;
         this.seats = seats;
         this.time = time;
+        this.theater = theater;
+        this.location = location;
     }
 
     public String getImgReference() {
@@ -66,5 +70,21 @@ public class OrderModel {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getTheater() {
+        return theater;
+    }
+
+    public void setTheater(String theater) {
+        this.theater = theater;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

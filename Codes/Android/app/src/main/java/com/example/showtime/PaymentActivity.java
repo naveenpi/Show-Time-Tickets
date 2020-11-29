@@ -56,13 +56,13 @@ public class PaymentActivity extends AppCompatActivity implements AdapterView.On
             @Override
             public void onClick(View v) {
 
-
-                Map<String,Object> payments= new HashMap<>();
-                payments.put("user",mAuth.getCurrentUser().getUid());
-                payments.put("cardNumber",cardNumberET.getText().toString());
-                payments.put("nameOnCard",nameOnCardET.getText().toString());
-                payments.put("month",month);
-                payments.put("year",year);
+            if(validations()) {
+                Map<String, Object> payments = new HashMap<>();
+                payments.put("user", mAuth.getCurrentUser().getUid());
+                payments.put("cardNumber", cardNumberET.getText().toString());
+                payments.put("nameOnCard", nameOnCardET.getText().toString());
+                payments.put("month", month);
+                payments.put("year", year);
 
                 db.collection("payments").add(payments)
                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -78,9 +78,19 @@ public class PaymentActivity extends AppCompatActivity implements AdapterView.On
                             }
                         });
 
-                startActivity(new Intent(getApplicationContext(),PaymentConsole.class));
+                startActivity(new Intent(getApplicationContext(), PaymentConsole.class));
+            }
             }
         });
+    }
+
+    private boolean validations() {
+        if(cardNumberET.getText().toString().isEmpty() || nameOnCardET.getText().toString().isEmpty()){
+            cardNumberET.setError("Fill the Field");
+            nameOnCardET.setError("Fill the Field");
+            return false;
+        }
+        return true;
     }
 
     @Override

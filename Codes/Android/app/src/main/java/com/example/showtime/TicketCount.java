@@ -38,6 +38,8 @@ public class TicketCount extends AppCompatActivity {
             public void onClick(View v) {
                 Intent toSeating = new Intent(getApplicationContext(), SeatingActivity.class);
                 toSeating.putExtra("movieName",i.getStringExtra("movieName"));
+                toSeating.putExtra("theater", i.getStringExtra("theater"));
+                toSeating.putExtra("location", i.getStringExtra("location"));
                 toSeating.putExtra("date",i.getStringExtra("date"));
                 toSeating.putExtra("time",i.getStringExtra("time"));
                 toSeating.putExtra("count",count);

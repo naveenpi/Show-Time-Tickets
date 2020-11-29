@@ -156,6 +156,8 @@ public class SeatingActivity extends AppCompatActivity implements View.OnClickLi
                     final Map<String,Object> booking = new HashMap<>();
                     booking.put("user",mAuth.getCurrentUser().getUid());
                     booking.put("movieName",i.getStringExtra("movieName"));
+                    booking.put("theater", i.getStringExtra("theater"));
+                    booking.put("location", i.getStringExtra("location"));
                     booking.put("date",i.getStringExtra("date"));
                     booking.put("time",i.getStringExtra("time"));
                     booking.put("payment","no");

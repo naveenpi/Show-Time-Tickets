@@ -14,7 +14,6 @@
         android:padding="16dp">
 
 
-
         <TextView
             android:id="@+id/bookingRefOrderList"
             android:layout_width="wrap_content"
@@ -52,6 +51,19 @@
             app:layout_constraintStart_toStartOf="@+id/bookingRefOrderList"
             app:layout_constraintTop_toBottomOf="@id/MovieNameOrderList"
             app:layout_constraintVertical_bias="0.02" />
+
+<!--        <TextView-->
+<!--            android:id="@+id/TheaterLocation"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@id/DateTimeSeatsOrderList"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:text="Theater, Location"-->
+<!--            android:textAppearance="@style/TextAppearance.AppCompat.Body1"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/bookingRefOrderList"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/DateTimeSeatsOrderList"-->
+<!--            app:layout_constraintVertical_bias="0.02" />-->
 
         <ImageView
             android:id="@+id/MoviePosterOrderList"

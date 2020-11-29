@@ -42,8 +42,8 @@ public class AddMovies extends AppCompatActivity {
     private Uri filePath;
     StorageReference storageReference, ref;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    EditText movieName_EditText,genre_EditText,rating_EditText,ticket_price_EditText;
-    String movieName_Text, genre_Text, rating_Text, ticketPrice_Text;
+    EditText movieName_EditText,genre_EditText,rating_EditText,ticket_price_EditText, theater_EditText, location_EditText;
+    String movieName_Text, genre_Text, rating_Text, ticketPrice_Text, theater_Text, location_Text;
     ImageView movieImage;
     String profileImageUrl="";
     Button addMovie,uploadImg;
@@ -57,6 +57,8 @@ public class AddMovies extends AppCompatActivity {
         genre_EditText=findViewById(R.id.Genre);
         rating_EditText=findViewById(R.id.Rating);
         ticket_price_EditText=findViewById(R.id.TicketPrice);
+        theater_EditText = findViewById(R.id.Theater);
+        location_EditText = findViewById(R.id.Location);
         movieImage=findViewById(R.id.movieImage);
         addMovie=findViewById(R.id.add_movie);
         uploadImg=findViewById(R.id.upload);
@@ -86,40 +88,59 @@ public class AddMovies extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                movieName_Text = movieName_EditText.getText().toString();
-                genre_Text = genre_EditText.getText().toString();
-                rating_Text = rating_EditText.getText().toString();
-                ticketPrice_Text = ticket_price_EditText.getText().toString();
+                if(validations()) {
+                    movieName_Text = movieName_EditText.getText().toString();
+                    genre_Text = genre_EditText.getText().toString();
+                    rating_Text = rating_EditText.getText().toString();
+                    ticketPrice_Text = ticket_price_EditText.getText().toString();
+                    theater_Text = theater_EditText.getText().toString();
+                    location_Text = location_EditText.getText().toString();
 
-                Map<String,Object> movies= new HashMap<>();
-                movies.put("movieName",movieName_Text);
-                movies.put("genre",genre_Text);
-                movies.put("rating",rating_Text);
-                movies.put("ticketPrice",ticketPrice_Text);
-                movies.put("imgReference",profileImageUrl);
-                Log.d("movie data",movies.toString());
+                    Map<String, Object> movies = new HashMap<>();
+                    movies.put("movieName", movieName_Text);
+                    movies.put("genre", genre_Text);
+                    movies.put("rating", rating_Text);
+                    movies.put("ticketPrice", ticketPrice_Text);
+                    movies.put("theater", theater_Text);
+                    movies.put("location", location_Text);
+                    movies.put("imgReference", profileImageUrl);
+                    Log.d("movie data", movies.toString());
 
-                db.collection("movie")
-                        .document(movieName_Text)
-                        .set(movies)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Log.d("Successful registration", "movie is created for "+ movieName_Text);
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.d("Failure registration", "movie is not created"+ movieName_EditText.getText().toString());
-                            }
-                        });
+                    db.collection("movie")
+                            .document(movieName_Text)
+                            .set(movies)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Log.d("Successful registration", "movie is created for " + movieName_Text);
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.d("Failure registration", "movie is not created" + movieName_EditText.getText().toString());
+                                }
+                            });
 
-                startActivity(new Intent(getApplicationContext(),Admin.class));
-                finish();
-
+                    startActivity(new Intent(getApplicationContext(), Admin.class));
+                    finish();
+                }
             }
         });
+    }
+
+    private boolean validations() {
+
+        if(movieName_EditText.getText().toString().isEmpty() || genre_EditText.getText().toString().isEmpty() || rating_EditText.getText().toString().isEmpty() || ticket_price_EditText.getText().toString().isEmpty() || location_EditText.getText().toString().isEmpty() || theater_EditText.getText().toString().isEmpty()){
+            movieName_EditText.setError("Fill the Field");
+            genre_EditText.setError("Fill the Field");
+            rating_EditText.setError("Fill the Field");
+            ticket_price_EditText.setError("Fill the Field");
+            location_EditText.setError("Fill the Field");
+            theater_EditText.setError("Fill the Field");
+            return false;
+        }
+        return true;
     }
 
     private String getExtension(Uri uri){

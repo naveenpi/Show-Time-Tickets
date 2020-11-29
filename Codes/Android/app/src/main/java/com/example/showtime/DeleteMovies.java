@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -20,7 +23,7 @@ public class DeleteMovies extends AppCompatActivity {
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
     MovieAdapter adapter;
     StorageReference ref= FirebaseStorage.getInstance().getReference();
-
+    AlertDialog.Builder display_alert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +56,27 @@ public class DeleteMovies extends AppCompatActivity {
             }
 
             @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            public void onSwiped(@NonNull final RecyclerView.ViewHolder viewHolder, int direction) {
+                display_alert = new AlertDialog.Builder(DeleteMovies.this);
+                display_alert.setTitle("DELETE");
+                display_alert.setMessage("Are You sure? ");
+                display_alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        adapter.deleteItem(viewHolder.getAdapterPosition());
+                        display_alert.create().dismiss();
+                    }
+                });
+                display_alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        display_alert.create().dismiss();
+                        recyclerView.setAdapter(adapter);
 
-                adapter.deleteItem(viewHolder.getAdapterPosition());
+                    }
+                });
+                display_alert.show();
+                //adapter.deleteItem(viewHolder.getAdapterPosition());
             }
         }).attachToRecyclerView(recyclerView);
 

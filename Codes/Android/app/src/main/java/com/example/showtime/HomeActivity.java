@@ -96,8 +96,14 @@ public class HomeActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         Query query = firebaseFirestore.collection("movie").orderBy("movieName").startAt(s).endAt(s+"\uf8ff");
 
         if(!testQuery(s))
-            query = firebaseFirestore.collection("movie").orderBy("genre").startAt(s).endAt(s + "\uf8ff");
-
+            query = firebaseFirestore.collection("movie").orderBy("location").startAt(s).endAt(s + "\uf8ff");
+//
+//        if(!testQueryGenre(s))
+//            query = firebaseFirestore.collection("movie").orderBy("theater").startAt(s).endAt(s + "\uf8ff");
+//
+//        if(!testQueryTheater(s))
+//            query = firebaseFirestore.collection("movie").orderBy("location").startAt(s).endAt(s + "\uf8ff");
+//
         FirestoreRecyclerOptions<MoviesModel> response = new FirestoreRecyclerOptions.Builder<MoviesModel>()
                 .setQuery(query, MoviesModel.class)
                 .build();
@@ -109,19 +115,6 @@ public class HomeActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
         recyclerView.setAdapter(adapter);
 
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT |ItemTouchHelper.RIGHT) {
-
-            @Override
-            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-                return false;
-            }
-
-            @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-
-                adapter.deleteItem(viewHolder.getAdapterPosition());
-            }
-        }).attachToRecyclerView(recyclerView);
 
         adapter.setOnItemClickListener(new MovieAdapter.OnItemClickListener() {
             @Override
@@ -130,8 +123,16 @@ public class HomeActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 Intent i = new Intent(getApplicationContext(),TimeActivity.class);
                 Log.d("intent ",documentSnapshot.get("movieName").toString());
                 i.putExtra("movieName",documentSnapshot.get("movieName").toString());
+                i.putExtra("theater",documentSnapshot.get("theater").toString());
+                i.putExtra("location",documentSnapshot.get("location").toString());
                 startActivity(i);
 
+            }
+
+            @Override
+            public void clickOnButton(View v) {
+
+                startActivity(new Intent(getApplicationContext(),Feedback.class));
             }
         });
     }
@@ -154,6 +155,7 @@ public class HomeActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         });
         return i;
     }
+
 
     @Override
     protected void onStop() {

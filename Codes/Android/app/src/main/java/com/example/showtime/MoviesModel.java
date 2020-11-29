@@ -7,16 +7,36 @@ public class MoviesModel {
     private String movieName;
     private String rating;
     private String ticketPrice;
+    private String theater;
+    private String location;
 
     public MoviesModel() {
     }
 
-    public MoviesModel(String genre, String imgReference, String movieName, String rating, String ticketPrice) {
+    public String getTheater() {
+        return theater;
+    }
+
+    public void setTheater(String theater) {
+        this.theater = theater;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public MoviesModel(String genre, String imgReference, String movieName, String rating, String ticketPrice, String theater, String location) {
         this.genre = genre;
         this.imgReference = imgReference;
         this.movieName = movieName;
         this.rating = rating;
         this.ticketPrice = ticketPrice;
+        this.theater = theater;
+        this.location = location;
     }
 
     public void setGenre(String genre) {

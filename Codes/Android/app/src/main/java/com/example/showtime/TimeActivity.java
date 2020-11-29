@@ -23,6 +23,7 @@ public class TimeActivity extends AppCompatActivity {
     SimpleDateFormat df = new SimpleDateFormat("dd-MMM", Locale.getDefault());
 
     Intent toCount;
+    Intent i;
     Button date1, date2, date3, date4;
     Button time1, time2, time3, time4;
     Button next;
@@ -52,7 +53,7 @@ public class TimeActivity extends AppCompatActivity {
 
         next = findViewById(R.id.nextTimingActivity);
 
-        Intent i = getIntent();
+        i = getIntent();
         movieName.setText(i.getStringExtra("movieName"));
     }
 
@@ -136,6 +137,8 @@ public class TimeActivity extends AppCompatActivity {
 
             case R.id.nextTimingActivity:
                 toCount.putExtra("movieName",movieName.getText().toString());
+                toCount.putExtra("theater", i.getStringExtra("theater"));
+                toCount.putExtra("location", i.getStringExtra("location"));
                 startActivity(toCount);
         }
     }

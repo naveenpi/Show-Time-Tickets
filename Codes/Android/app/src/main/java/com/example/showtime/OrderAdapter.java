@@ -51,7 +51,8 @@ public class OrderAdapter  extends FirestoreRecyclerAdapter<OrderModel, OrderAda
 
         orderViewHolder.bookingRef.setText("Proceed to Payment by clicking");
         orderViewHolder.movieName.setText("Movie Name: "+orderModel.getMovieName());
-        orderViewHolder.dateTimeSeats.setText("Date: "+orderModel.getDate()+"\nTime: "+orderModel.getTime()+"\nSeats: "+orderModel.getSeats());
+        orderViewHolder.dateTimeSeats.setText("Date: "+orderModel.getDate()+"\nTime: "+orderModel.getTime()+"\nSeats: "+orderModel.getSeats()+"\nTheater: "+orderModel.getTheater()+"\nLocation: "+orderModel.getLocation());
+        //orderViewHolder.theaterLocation.setText("Theater: "+orderModel.getTheater()+"\nLocation: "+orderModel.getLocation());
         orderViewHolder.moviePoster.setImageResource(R.drawable.ic_movie_black_24dp);
         Log.d("poster", moviePoster);
         //Picasso.get().load(moviePoster).into(orderViewHolder.moviePoster);
@@ -74,6 +75,7 @@ public class OrderAdapter  extends FirestoreRecyclerAdapter<OrderModel, OrderAda
         private TextView bookingRef;
         private TextView movieName;
         private TextView dateTimeSeats;
+        //private TextView theaterLocation;
 
         public OrderViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -82,6 +84,7 @@ public class OrderAdapter  extends FirestoreRecyclerAdapter<OrderModel, OrderAda
             bookingRef = itemView.findViewById(R.id.bookingRefOrderList);
             movieName = itemView.findViewById(R.id.MovieNameOrderList);
             dateTimeSeats = itemView.findViewById(R.id.DateTimeSeatsOrderList);
+            //theaterLocation = itemView.findViewById(R.id.TheaterLocation);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

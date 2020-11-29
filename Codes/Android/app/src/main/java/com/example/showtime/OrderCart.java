@@ -103,7 +103,7 @@ public class OrderCart extends AppCompatActivity {
                 Log.d("intent ",documentSnapshot.get("movieName").toString());
                 i.putExtra("id",documentSnapshot.getId());
                 i.putExtra("movieName",documentSnapshot.get("movieName").toString());
-                i.putExtra("dateTimeSeats","Date: "+documentSnapshot.get("date").toString()+"\nTime: "+documentSnapshot.get("time")+"\nSeats: "+documentSnapshot.get("seats"));
+                i.putExtra("dateTimeSeats","Date: "+documentSnapshot.get("date").toString()+"\nTime: "+documentSnapshot.get("time")+"\nSeats: "+documentSnapshot.get("seats")+"\nTheater: "+documentSnapshot.get("theater")+"\nLocation: "+documentSnapshot.get("location"));
                 i.putExtra("seats",documentSnapshot.get("seats")+"");
                 startActivity(i);
             }
